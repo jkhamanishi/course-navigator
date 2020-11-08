@@ -1,0 +1,209 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+var data = {};
+
+
+function mode(){
+    return parseInt(document.querySelector('input[name="mode"]:checked').value);
+    // 1 --> Object with header row and header column
+    // 2 --> Object with header row
+    // 3 --> Array without headings
+}
+
+
+function openFile(event){
+    var input = event.target;
+
+    var reader = new FileReader();
+    reader.onload = function(){
+        console.log('file successfully loaded')
+        var output = document.getElementById('out');
+        output.innerHTML = reader.result;
+        data = file2data(reader.result);
+        switch (mode()){
+            case 1: // Object with header row and header column
+                data2object(data);
+                break;
+            case 2: // Object with header row
+                data2object(data);
+                break;
+            case 3: // Array without headings
+                data2array(data);
+                break;
+        }
+    };
+    reader.readAsBinaryString(input.files[0]);
+};
+
+function file2data(data){
+    var newValue = ",";
+    var newLine = "\n";
+    // console.log('this:'+newValue + ' this:'+newLine)
+    
+    var lines = data.split(newLine);
+    for (var i = 0; i < lines.length-1; i++){
+        //every last value in each row contains some sort of bad character at the end that isn't "/n"
+        lines[i] = lines[i].split(lines[i].charAt(lines[i].length-1))[0]
+    }
+    var titles = lines[0].split(newLine)[0].split(newValue);
+    var data = new Array(lines.length - 1);
+    
+    switch (mode()){
+        case 1: // Object with header row and header column
+            for (var i = 1; i < lines.length; i++) {
+                lines[i] = lines[i].split(newValue);
+                data[lines[i][0]] = {};
+                for (var j = 1; j < titles.length; j++) {
+                    data[lines[i][0]][titles[j]] = lines[i][j];
+                };
+            };
+            break;
+        case 2: // Object with header row
+            for (var i = 1; i < lines.length; i++) {
+                data[i - 1] = {};
+                lines[i] = lines[i].split(newValue);
+                for (var j = 0; j < titles.length; j++) {
+                    data[i - 1][titles[j]] = lines[i][j];
+                };
+            };
+            break;
+        case 3: // Array without headings
+            for (var i = 1; i < lines.length; i++) {
+                data[i - 1] = [];
+                lines[i] = lines[i].split(newValue);
+                for (var j = 0; j < titles.length; j++) {
+                    data[i - 1][j] = lines[i][j];
+                };
+            };
+            break;
+    }
+
+    // console.log(data);
+    return data;
+}
+
+function data2object(data){
+    var varname = document.getElementById("varname").value
+    switch (mode()){
+        case 1:
+            var text = "var " + varname + " = {"
+            
+            var rows = Object.keys(data).length;
+            for (var i=0; i<rows; i++){ // for every row
+                text = text + Object.keys(data)[i] + ": {"
+                
+                var rowName = Object.keys(data)[i]
+                for (var j=0; j<Object.keys(data[rowName]).length; j++){ // for every column
+                    var colName = Object.keys(data[rowName])[j];
+                    text = text + colName + ": "
+                    text = text + "\"" + data[rowName][colName] + "\", "
+                }
+                
+                text = text + "},"
+            }
+            
+            text = text + "};"
+            break;
+        case 2:
+            var text = "var " + varname + " = ["
+            
+            for (var i=0; i<data.length; i++){ // for every row
+                text = text + "{"
+                
+                for (var j=0; j<Object.keys(data[0]).length; j++){ // for every column
+                    text = text + Object.keys(data[0])[j] + ": "
+                    text = text + "\"" + data[i][Object.keys(data[0])[j]] + "\", "
+                }
+                
+                text = text + "},"
+            }
+            
+            text = text + "];"
+            break;
+    }
+    document.getElementById('code').innerHTML = text;
+}
+
+
+function data2array(data){
+    var varname = document.getElementById("varname").value
+    var text = "var " + varname + " = ["
+    
+    for (var i=0; i<data.length; i++){ // for every row
+        text = text + "["
+        
+        for (var j=0; j<data[0].length; j++){ // for every column
+            text = text + "\"" + data[i][j] + "\", "
+        }
+        
+        text = text + "],"
+    }
+    
+    text = text + "];"
+    document.getElementById('code').innerHTML = text;
+}
+
+
+function copyToClipboard(element) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(element).text()).select();
+    document.execCommand("copy");
+    $temp.remove();
+}
+function copied(ele){
+    var temp = ele;
+    $(temp).text("Copied");
+}
+
+</script>
+
+
+<style>
+code {
+    background-color: #eee;
+    border: 1px solid #999;
+    display: block;
+    padding: 20px;
+    overflow-wrap: anywhere;
+}
+</style>
+
+
+<body>
+
+<h1>.csv to .js array</h1><br>
+
+
+
+<label><u>Please fill before importing file</u></label><br><br>
+<label for="varname">variable name:</label>
+<input type="text" id="varname" name="varname" value="newData"><br>
+<input type="radio" name="mode" id="object1" value=1 checked>
+<label for="object1">.csv with header row and header column --> Object with labeled rows and labeled columns</label><br>
+<input type="radio" name="mode" id="object2" value=2>
+<label for="object2">.csv with header row --> Object with header row</label><br>
+<input type="radio" name="mode" id="array" value=3>
+<label for="array">.csv with header row --> Array without headings</label><br>
+<input type='file' accept='text/csv' onchange='openFile(event)'><br>
+
+
+<br><br>
+
+<code id="code">JavaScript array will appear here</code>
+<button id="copyButton" onclick="copied('#copyButton'); copyToClipboard('#code')">Copy Code</button>
+
+<br><br><br>
+
+<p>.csv contents:</p>
+<output id="out">file contents will appear here</output>
+
+</body>
+
+
+
+
+
+
+
+
