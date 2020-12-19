@@ -5,9 +5,9 @@ var data = {};
 
 function mode(){
     return parseInt(document.querySelector('input[name="mode"]:checked').value);
-    // 1 --> Object with header row and header column
-    // 2 --> Object with header row
-    // 3 --> Array without headings
+    // 1  --> Object with header row and header column
+    // 2  --> Object with header row
+    // 3,4--> Array without headings
 }
 
 
@@ -19,7 +19,11 @@ function openFile(event){
         console.log('file successfully loaded')
         var output = document.getElementById('out');
         output.innerHTML = reader.result;
+        
+        //convert the csv to a javascript object or array
         data = file2data(reader.result);
+        
+        //convert the javascript object or array into text
         switch (mode()){
             case 1: // Object with header row and header column
                 data2object(data);
@@ -28,6 +32,9 @@ function openFile(event){
                 data2object(data);
                 break;
             case 3: // Array without headings
+                data2array(data);
+                break;
+            case 4: // Array without headings
                 data2array(data);
                 break;
         }
@@ -76,9 +83,18 @@ function file2data(data){
                 };
             };
             break;
+        case 4: // Array without headings
+            for (var i = 0; i < lines.length; i++) {
+                data[i ] = [];
+                lines[i] = lines[i].split(newValue);
+                for (var j = 0; j < titles.length; j++) {
+                    data[i ][j] = lines[i][j];
+                };
+            };
+            break;
     }
 
-    // console.log(data);
+    console.log(data);
     return data;
 }
 
@@ -178,13 +194,15 @@ code {
 
 <label><u>Please fill before importing file</u></label><br><br>
 <label for="varname">variable name:</label>
-<input type="text" id="varname" name="varname" value="newData"><br>
-<input type="radio" name="mode" id="object1" value=1 checked>
+<input type="text" id="varname" name="varname" value="gridData"><br>
+<input type="radio" name="mode" id="object1" value=1>
 <label for="object1">.csv with header row and header column --> Object with labeled rows and labeled columns</label><br>
 <input type="radio" name="mode" id="object2" value=2>
 <label for="object2">.csv with header row --> Object with header row</label><br>
 <input type="radio" name="mode" id="array" value=3>
 <label for="array">.csv with header row --> Array without headings</label><br>
+<input type="radio" name="mode" id="array" value=4 checked>
+<label for="array">.csv without header row --> Array without headings</label><br>
 <input type='file' accept='text/csv' onchange='openFile(event)'><br>
 
 
