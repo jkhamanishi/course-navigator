@@ -1,0 +1,38 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+#grid {
+  display: grid;
+  grid-gap: 0px;
+  //background-color: #2196F3;
+  //background-color: coral;
+  background-color: rgba(255, 127, 80, 0.5);
+  padding: 5px;
+  margin: 0px 2%;
+  //opacity: 0.5;
+}
+
+.empty, .drag{
+  //width: auto;
+  height: 2vw;
+  align-items: center;
+}
+.empty {
+  margin: 5px 10px;
+  background-color: white;
+}
+.drag {
+  z-index: 9;
+  background-color: lightblue;
+  text-align: center;
+  padding: 5px;
+  font: 1vw sans-serif;
+  //font: 1vw "Comic Sans MS", "Comic Sans", 'Brush Script MT', sans-serif;
+  outline: 0.25em solid royalblue;
+}
+.drag:hover {
+  background-color: yellow;
+}
