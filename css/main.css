@@ -13,11 +13,12 @@
   padding: 5px;
   margin: 0px 2%;
   //opacity: 0.5;
+  min-width: 900px;
 }
 
 .empty, .drag{
   //width: auto;
-  height: 2vw;
+  height: max(20px, 2vw);
   align-items: center;
 }
 .empty {
@@ -29,7 +30,7 @@
   background-color: lightblue;
   text-align: center;
   padding: 5px;
-  font: 1vw sans-serif;
+  font: max(10px, 1vw) sans-serif;
   //font: 1vw "Comic Sans MS", "Comic Sans", 'Brush Script MT', sans-serif;
   outline: 0.25em solid royalblue;
 }
