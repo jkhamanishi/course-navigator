@@ -22,8 +22,8 @@
   align-items: center;
 }
 .empty {
-  margin: 5px 10px;
-  background-color: white;
+  margin: max(10px, 1vw) 10px;
+  //background-color: white;
 }
 .drag {
   z-index: 9;
@@ -33,7 +33,22 @@
   font: max(10px, 1vw) sans-serif;
   //font: 1vw "Comic Sans MS", "Comic Sans", 'Brush Script MT', sans-serif;
   outline: 0.25em solid royalblue;
+  //position: absolute;
 }
 .drag:hover {
   background-color: yellow;
+}
+
+
+#myDIV{
+  position: static;
+  z-index: 9;
+  cursor: move;
+}
+
+.svgContainer {
+    position: absolute; 
+    top: 0px; 
+    left: 0px;
+    z-index: -1;
 }

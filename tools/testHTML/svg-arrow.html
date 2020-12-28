@@ -1,0 +1,22 @@
+<div class="svgContainer">
+<svg>
+<defs>
+  <marker id="arrowhead" markerWidth="13" markerHeight="13" refx="6" refy="3" orient="auto">
+    <!-- <polygon points="2,1 2,10 10,6" style="fill:red;" /> -->
+    <!-- <polygon points="0,0 0,4 3.5,2" style="fill:red;" /> -->
+    <polygon points="0,0 0,6 5,3" style="fill:red;" />
+  </marker>
+</defs>
+
+<line x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(255,0,0);stroke-width:2; marker-end: url(#arrowhead);" />
+</svg>
+</div>
+
+<style>
+.svgContainer {
+    position: absolute; 
+    top: 0px; 
+    left: 0px;
+    z-index: -1;
+}
+</style>
