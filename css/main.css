@@ -17,13 +17,14 @@
 }
 
 .empty, .drag{
-  //width: auto;
+  width: auto;
   height: max(20px, 2vw);
   align-items: center;
 }
 .empty {
-  margin: max(10px, 1vw) 10px;
+  margin: max(12px, 1vw) 10px;
   //background-color: white;
+  min-width: 20px;
 }
 .drag {
   z-index: 9;

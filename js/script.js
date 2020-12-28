@@ -31,6 +31,7 @@ function loadGrid(gridData){
             newDIV.setAttribute("ondrop", "drop(event)");
             newDIV.addEventListener("dragenter", dragEnter);
             newDIV.addEventListener("dragleave", dragLeave);
+            newDIV.id = "empty"+i+"-"+j;
             grid.appendChild(newDIV);
             
             if (gridData[i][j] != "") {
@@ -43,7 +44,7 @@ function loadGrid(gridData){
                 dragDIV.classList.add('drag');
                 dragDIV.setAttribute("draggable", "true");
                 dragDIV.setAttribute("ondragstart", "dragStart(event)");
-                dragDIV.setAttribute("ondrag", "dragging()");
+                dragDIV.setAttribute("ondrag", "dragging(event)");
                 dragDIV.setAttribute("ondragend", "dragEnd()");
                 dragDIV.id = courseCode.replace(/ +/g, "");
                 dragDIV.style.setProperty("cursor", "move")
@@ -52,7 +53,7 @@ function loadGrid(gridData){
                 
                 var prereqs = courseData[courseCode].prereqs;
                 if (prereqs.length == 0){
-                    dragDIV.innerHTML += "**";
+                    //dragDIV.innerHTML += "**";
                 } else {
                     for (prereq of prereqs) {
                         var svg = document.createElement("DIV");
@@ -87,100 +88,59 @@ function loadGrid(gridData){
 
 
 
-
 // --- Drag 'n Drop functions ---
 // ------------------------------
+var newlocation = "CHEM120";
+var draggedCourse;
+
 
 // functions for the placeholders
+
 function allowDrop(ev) {
-  if (ev.target.innerHTML == "") {ev.preventDefault();}
+    if (ev.target.innerHTML == "") {ev.preventDefault();}
 }
-
 function drop(ev) {
-  ev.preventDefault();
-  var data = ev.dataTransfer.getData("text");
-  ev.target.appendChild(document.getElementById(data));
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
 }
-
 function dragEnter() {
-  this.style.backgroundColor = "gray";
-  //obj1 = this.getBoundingClientRect();
+    this.style.backgroundColor = "gray";
+    newlocation = this.id;
+}
+function dragLeave() {
+    //this.style.backgroundColor = "white";
+    this.style.backgroundColor = "";
+    //newlocation = draggedCourse;
 }
 
-function dragLeave() {
-  //this.style.backgroundColor = "white";
-  this.style.backgroundColor = "";
-}
 
 // functions for the draggable object
 
 function dragStart(ev) {
-  ev.dataTransfer.setData("text", ev.target.id);
-  //dragging = true;
+    ev.dataTransfer.setData("text", ev.target.id);
 }
-
+function dragging(ev) {
+    draggedCourse = ev.target.id;
+    for (svg of findArrows("obj2", ev.target.id)) {
+        svg.setAttribute("obj2", newlocation)
+        orientArrow(svg);
+        svg.setAttribute("obj2", draggedCourse);
+}   }
 function dragEnd() {
-    //dragging = false;
-}
-
-function dragging() {
-    //log("heloo");
-    //orientArrow(svg, obj1, obj2)
+    orientAllArrows();
+    var placeholders = document.getElementsByClassName("empty");
+    for (x of placeholders) {x.style.backgroundColor = "";};
 }
 
 
 
 
 
-//var dragging = false;
-
-// dragElement() not currently used
-function dragElement(elmnt) {
-  //  orientArrow()
-  var box1 = 0, box2 = 0, box3 = 0, box4 = 0;
-  elmnt.onmousedown = dragMouseDown;
-
-  function dragMouseDown(e) {
-    e = e || window.event;
-    e.preventDefault();
-    elmnt.style.top = "";
-    elmnt.style.left = "";
-    elmnt.style.position = "absolute";
-    // get the mouse cursor position at startup:
-    box3 = e.clientX;
-    box4 = e.clientY;
-    document.onmouseup = closeDragElement;
-    // call a function whenever the cursor moves:
-    document.onmousemove = function(){elementDrag();}
-    dragging = true;
-  }
-
-  function elementDrag(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // calculate the new cursor position:
-    box1 = box3 - e.clientX;
-    box2 = box4 - e.clientY;
-    box3 = e.clientX;
-    box4 = e.clientY;
-    // set the element's new position:
-    elmnt.style.top = (elmnt.offsetTop - box2) + "px";
-    elmnt.style.left = (elmnt.offsetLeft - box1) + "px";  
-  }
-
-  function closeDragElement() {
-    /* stop moving when mouse button is released:*/
-    document.onmouseup = null;
-    document.onmousemove = null;
-    elmnt.style.position = "static";
-    dragging = false;
-  }
-}
 
 
 // --- Moving the Arrows ---
 // ----------------------------------
-
 
 
 function orientArrow(svg, obj1, obj2) {
@@ -241,6 +201,15 @@ function orientAllArrows() {
     }
 }
 
+function findArrows(attribute, value) {
+    var allSVGs = document.getElementsByClassName("svgContainer");
+    var result = [];
+    for (svg of allSVGs) {
+        if (svg.getAttribute(attribute) == value) {result.push(svg)};
+    }
+    return result;
+}
+
 
 
 
@@ -249,31 +218,14 @@ function orientAllArrows() {
 // ----------------------------------
 
 
-
-// var svg
-// var obj1 = {};
-// var obj2 = {};
-
 $(document).ready(function(){
     //alert('page loaded');
     loadGrid(flexA);
-    //dragElement(document.getElementById("myDIV"));
-    
-    
-    var svg = document.getElementsByClassName("svgContainer")[0];
-    // obj1 = document.getElementById("MSE312").getBoundingClientRect();
-    // obj2 = document.getElementById("PHYS140").getBoundingClientRect();
-    //orientArrow(svg);
-    
     orientAllArrows();
 });
 
 
-
-
 $(window).resize(function(){
-    //var svg = document.getElementsByClassName("svgContainer")[0];
-    //orientArrow(svg);
     orientAllArrows();
 });
 
