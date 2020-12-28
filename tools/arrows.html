@@ -117,7 +117,7 @@ function orientArrow() {
     svg.firstElementChild.setAttribute('height', Math.max(obj1.bottom, obj2.bottom)-svgPos.top)
 
     //Prioritize connecting the arrow to the top and bottom of the boxes
-    var verticlePriority = true
+    var verticlePriority = true;
     
     if (gaps[0] == largestGap || (gaps[0] > 0 && verticlePriority)) { // when obj2 is below obj1
         arrow.setAttribute('x1', obj1.centerx - svgPos.left);

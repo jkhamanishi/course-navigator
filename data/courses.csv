@@ -1,0 +1,4 @@
+code,name,prereq 1,prereq 2,prereq 3,prereq 4,term 1,term 2,term 3
+TEST100,test course 1,,,,,Fall,Spring,Summer
+TEST101,test course 2,TEST100,,,,Spring,,
+TEST102,test course 3,TEST100,TEST101,,,Summer,,
