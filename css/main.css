@@ -4,6 +4,10 @@
   padding: 0;
 }
 
+body {
+  margin: 5px;
+}
+
 #grid {
   display: grid;
   grid-gap: 0px;
@@ -17,27 +21,30 @@
 }
 
 .empty, .drag{
-  width: auto;
+  //width: auto;
   height: max(20px, 2vw);
   align-items: center;
 }
 .empty {
   margin: max(12px, 1vw) 10px;
   //background-color: white;
-  min-width: 20px;
+  //min-width: 20px;
+  display: grid;
+  place-items: center;
 }
 .drag {
   z-index: 9;
   background-color: lightblue;
   text-align: center;
   padding: 5px;
-  font: max(10px, 1vw) sans-serif;
+  font-size: max(10px, 1vw);
+  font-family: sans-serif;
   //font: 1vw "Comic Sans MS", "Comic Sans", 'Brush Script MT', sans-serif;
   outline: 0.25em solid royalblue;
   //position: absolute;
 }
 .drag:hover {
-  background-color: yellow;
+  background-color: deeppink !important;
 }
 
 
