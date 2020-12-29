@@ -1,11 +1,12 @@
 
 
-function hello() {
-    alert('Hello world! (test successful)');
-};
+function hello() {alert('Hello world! (test successful)');};
 
-function log(text){console.log(text)};
+function setDarkTheme(){document.body.classList.add('darkTheme');};
 
+function here(){console.log("here");};
+
+function log(text){console.log(text);};
 
 
 // --- Grid Scripts ---
