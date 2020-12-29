@@ -18,11 +18,26 @@ function loadGrid(gridData){
     var grid = document.getElementById("grid");
     grid.innerHTML = "";
 
-    grid.style.setProperty('grid-template-columns', "1fr ".repeat(gridData[0].length));
+    grid.style.setProperty('grid-template-columns', "auto "+"1fr ".repeat(gridData[0].length));
 
     for (var i=0; i<gridData.length; i++){ // for every row
         
-        for (var j=0; j<gridData[0].length; j++){ // for every column
+        for (var j=-1; j<gridData[0].length; j++){ // for every column
+            if (j==-1) {
+                var term;
+                switch (i%3) {
+                    case 0: term = "Fall"; break;
+                    case 1: term = "Spring"; break;
+                    case 2: term = "Summer"; break;
+                }
+                var newDIV = document.createElement("DIV");
+                newDIV.classList.add('termLabel');
+                newDIV.innerHTML = "<div>Year "+Math.floor(i/3+1)+" "+term+"</div>";
+                newDIV.setAttribute("style", "grid-row: "+(i+1)+"; grid-column: "+(j+2)+"; z-index: 1;")
+                grid.appendChild(newDIV);
+                continue;
+            }
+            
             // Add empty placeholders
             var newDIV = document.createElement("DIV");
             //newDIV.innerHTML = "corn";
@@ -32,6 +47,7 @@ function loadGrid(gridData){
             newDIV.addEventListener("dragenter", dragEnter);
             newDIV.addEventListener("dragleave", dragLeave);
             newDIV.id = "empty"+i+"-"+j;
+            newDIV.setAttribute("style", "grid-row: "+(i+1)+"; grid-column: "+(j+2)+"; z-index: 1;")
             grid.appendChild(newDIV);
             
             if (gridData[i][j] != "") {
@@ -81,6 +97,17 @@ function loadGrid(gridData){
                 
             }
         }
+    }
+    for (var i=0; i<gridData.length; i++){ // for every row
+        var color;
+        switch (i%3) {
+            case 0: color = "rgba(0, 176, 80, 0.5)"; break;
+            case 1: color = "rgba(0, 176, 240, 0.5)"; break;
+            case 2: color = "rgba(255, 192, 0, 0.5)"; break;
+        }
+        var newDIV = document.createElement("DIV");
+        document.getElementById("grid").appendChild(newDIV);
+        newDIV.setAttribute("style", "grid-column: 1 / -1;  background-color: "+color+";  grid-row: "+(i+1)+"; z-index: 0;")
     }
 }
 
@@ -325,6 +352,11 @@ $(document).ready(function(){
     //alert('page loaded');
     loadGrid(flexA);
     orientAllArrows();
+    
+    // var testDIV = document.createElement("DIV");
+    // document.getElementById("grid").appendChild(testDIV);
+    // testDIV.setAttribute("style", "grid-column: 1 / -1;  background-color: rgba(0, 0, 250, 1);  grid-row: 3; z-index: 0;")
+    
 });
 
 

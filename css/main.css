@@ -13,11 +13,19 @@ body {
   grid-gap: 0px;
   //background-color: #2196F3;
   //background-color: coral;
-  background-color: rgba(255, 127, 80, 0.5);
-  padding: 5px;
+  //background-color: rgba(255, 127, 80, 0.5);
+  padding: 5px 0px;
   margin: 0px 2%;
   //opacity: 0.5;
   min-width: 900px;
+  grid-auto-flow: dense;
+}
+
+.termLabel {
+  padding: auto;
+  display: grid;
+  place-items: center start;
+  font-size: max(10px, 1vw);
 }
 
 .empty, .drag{
@@ -58,5 +66,5 @@ body {
     position: absolute; 
     top: 0px; 
     left: 0px;
-    z-index: -1;
+    z-index: 0;
 }
