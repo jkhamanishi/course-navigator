@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<style>
+.draggable {
+  position: absolute;
+  z-index: 9;
+  height: 100px;
+  width: 100px;
+  background-color: #2196F3;
+  cursor: move;
+  color: #fff;
+  display: grid;
+  place-items: center;
+}
+
+#mydiv1 {
+  left: 100px;
+}
+
+#mydiv2 {
+  left: 200px;
+  top: 500px;
+}
+
+.svgContainer {
+  position: absolute;
+}
+
+ 
+</style>
+<body>
+
+<h1>Two Draggable DIV Elements with an Arrow Connecting Them</h1>
+<p>Click and hold the mouse button down while moving the DIV element</p>
+
+<div id="mydiv1" class="draggable"><div>1</div></div>
+<div id="mydiv2" class="draggable"><div>2</div></div>
+
+<div class="svgContainer" top="300px">
+<svg height="80vh" width="90vw">
+<defs>
+  <marker id="arrowhead" markerWidth="13" markerHeight="13" refx="10" refy="6" orient="auto">
+    <polygon points="2,1 2,10 10,6" style="fill:red;" />
+  </marker>
+</defs>
+
+<line x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(255,0,0);stroke-width:2; marker-end: url(#arrowhead);" />
+</svg>
+</div>
+
+<script>
+//Make the DIV element draggable:
+dragElement(document.getElementById("mydiv1"));
+dragElement(document.getElementById("mydiv2"));
+
+function dragElement(elmnt) {
+  orientArrow()
+  var box1 = 0, box2 = 0, box3 = 0, box4 = 0;
+  elmnt.onmousedown = dragMouseDown;
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    box3 = e.clientX;
+    box4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = function(){elementDrag(); orientArrow();}
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    box1 = box3 - e.clientX;
+    box2 = box4 - e.clientY;
+    box3 = e.clientX;
+    box4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - box2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - box1) + "px";
+  }
+
+  function closeDragElement() {
+    /* stop moving when mouse button is released:*/
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+
+function orientArrow() {
+    var arrow = document.getElementsByTagName("line")[0];
+
+    var svg = document.getElementsByClassName("svgContainer")[0];
+    var svgPos = svg.firstElementChild.getBoundingClientRect();
+
+    var obj1 = document.getElementById("mydiv1").getBoundingClientRect();
+    obj1.centerx = obj1.left + ((obj1.right - obj1.left)/2);
+    obj1.centery = obj1.top + ((obj1.bottom - obj1.top)/2);
+
+    var obj2 = document.getElementById("mydiv2").getBoundingClientRect();
+    obj2.centerx = obj2.left + ((obj2.right - obj2.left)/2);
+    obj2.centery = obj2.top + ((obj2.bottom - obj2.top)/2);
+    
+    var gaps = [];
+    gaps.push(obj2.top - obj1.bottom); // vertical gap when obj2 is below obj1
+    gaps.push(obj1.top - obj2.bottom); // vertical gap when obj2 is above obj1
+    gaps.push(obj2.left - obj1.right); // horizontal gap when obj2 is to the right of obj1
+    gaps.push(obj1.left - obj2.right); // horizontal gap when obj2 is to the left of obj1
+    largestGap = Math.max.apply(null, gaps);
+    
+    //moving and shaping the svg so it's not massive
+    svg.style.setProperty('left', Math.min(obj1.left, obj2.left)+"px");
+    svg.style.setProperty('top', Math.min(obj1.top, obj2.top)+"px");
+    svg.firstElementChild.setAttribute('width', Math.max(obj1.right, obj2.right)-svgPos.left)
+    svg.firstElementChild.setAttribute('height', Math.max(obj1.bottom, obj2.bottom)-svgPos.top)
+
+    //Prioritize connecting the arrow to the top and bottom of the boxes
+    var verticlePriority = true;
+    
+    if (gaps[0] == largestGap || (gaps[0] > 0 && verticlePriority)) { // when obj2 is below obj1
+        arrow.setAttribute('x1', obj1.centerx - svgPos.left);
+        arrow.setAttribute('y1', obj1.bottom - svgPos.top);;
+        arrow.setAttribute('x2', obj2.centerx - svgPos.left);
+        arrow.setAttribute('y2', obj2.top - svgPos.top);
+    } else if (gaps[1] == largestGap || (gaps[1] > 0 && verticlePriority)) { // when obj2 is above obj1
+        arrow.setAttribute('x1', obj1.centerx - svgPos.left);
+        arrow.setAttribute('y1', obj1.top - svgPos.top);
+        arrow.setAttribute('x2', obj2.centerx - svgPos.left);
+        arrow.setAttribute('y2', obj2.bottom - svgPos.top);
+    } else if (gaps[2] == largestGap) { // when obj2 is to the right of obj1
+        arrow.setAttribute('x1', obj1.right - svgPos.left);
+        arrow.setAttribute('y1', obj1.centery - svgPos.top);
+        arrow.setAttribute('x2', obj2.left - svgPos.left);
+        arrow.setAttribute('y2', obj2.centery - svgPos.top);
+    } else if (gaps[3] == largestGap) { // when obj2 is to the left of obj1
+        arrow.setAttribute('x1', obj1.left - svgPos.left);
+        arrow.setAttribute('y1', obj1.centery - svgPos.top);
+        arrow.setAttribute('x2', obj2.right - svgPos.left);
+        arrow.setAttribute('y2', obj2.centery - svgPos.top);
+    }
+}
+
+</script>
+
+
+
+
+
+
+</body>
+</html>

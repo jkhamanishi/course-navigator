@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<script src="../data/gridData.js"></script>
+<script>
+
+console.log(gridData) // var gridData from gridData.js
+
+
+window.onload = function(){
+
+var gridContainer = document.getElementById("gridContainer");
+
+gridContainer.style.setProperty('grid-template-columns', "auto ".repeat(gridData[0].length));
+
+for (var i=0; i<gridData.length; i++){ // for every row
+    
+    for (var j=0; j<gridData[0].length; j++){ // for every column
+        var newDIV = document.createElement("DIV");
+        //newDIV.innerHTML = "corn";
+        newDIV.classList.add('empty');
+        newDIV.setAttribute("ondragover", "allowDrop(event)");
+        newDIV.setAttribute("ondrop", "drop(event)");
+        //newDIV.setAttribute("ondragenter", "dragEnter()");
+        //newDIV.setAttribute("dragleave", "dragLeave()");
+        newDIV.addEventListener("dragenter", dragEnter);
+        newDIV.addEventListener("dragleave", dragLeave);
+        gridContainer.appendChild(newDIV);
+        
+        if (gridData[i][j] != "") {
+            var dragDIV = document.createElement("DIV");
+            //dragDIV.innerHTML = "corn";
+            //dragDIV.setAttribute("style", "width: 100px; height: 100px;");
+            //dragDIV.height = "100px";
+            dragDIV.classList.add('drag');
+            dragDIV.setAttribute("draggable", "true");
+            dragDIV.setAttribute("ondragstart", "drag(event)");
+            dragDIV.id = "drag" + i + j;
+            dragDIV.style.setProperty("cursor", "move")
+            newDIV.appendChild(dragDIV);
+        }
+    }
+    
+}
+}
+
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("text");
+  ev.target.appendChild(document.getElementById(data));
+}
+
+function dragEnter() {
+  this.style.backgroundColor = "gray";
+}
+
+function dragLeave() {
+  this.style.backgroundColor = "black";
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+
+
+
+
+</script>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+#gridContainer {
+  display: grid;
+  grid-gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+}
+
+.empty {
+  margin: 5px;
+  //width: 100px;
+  height: 100px;
+  background-color: black;
+}
+
+
+.drag {
+  z-index: 9;
+  //width: 100px;
+  height: 100px;
+  background-color: red;
+}
+.drag:hover {
+  background-color: green;
+}
+</style>
+
+<body>
+<h1>array to grid</h1>
+
+<div id="gridContainer"></div>
+
+<div id="textContainer"></div>
+
+
+</body>
+</html>

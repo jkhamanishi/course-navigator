@@ -1,0 +1,70 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 5px;
+}
+
+#grid {
+  display: grid;
+  grid-gap: 0px;
+  //background-color: #2196F3;
+  //background-color: coral;
+  //background-color: rgba(255, 127, 80, 0.5);
+  padding: 5px 0px;
+  margin: 0px 2%;
+  //opacity: 0.5;
+  min-width: 900px;
+  grid-auto-flow: dense;
+}
+
+.termLabel {
+  padding: auto;
+  display: grid;
+  place-items: center start;
+  font-size: max(10px, 1vw);
+}
+
+.empty, .drag{
+  //width: auto;
+  height: max(20px, 2vw);
+  align-items: center;
+}
+.empty {
+  margin: max(12px, 1vw) 10px;
+  //background-color: white;
+  //min-width: 20px;
+  display: grid;
+  place-items: center;
+}
+.drag {
+  z-index: 9;
+  background-color: lightblue;
+  text-align: center;
+  padding: 5px;
+  font-size: max(10px, 1vw);
+  font-family: sans-serif;
+  //font: 1vw "Comic Sans MS", "Comic Sans", 'Brush Script MT', sans-serif;
+  outline: 0.25em solid royalblue;
+  //position: absolute;
+}
+.drag:hover {
+  background-color: deeppink !important;
+}
+
+
+#myDIV{
+  position: static;
+  z-index: 9;
+  cursor: move;
+}
+
+.svgContainer {
+    position: absolute; 
+    top: 0px; 
+    left: 0px;
+    z-index: 0;
+}

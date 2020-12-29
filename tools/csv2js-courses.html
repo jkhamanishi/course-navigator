@@ -1,0 +1,208 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+var data = {};
+
+
+
+function openFile(event){
+    var input = event.target;
+
+    var reader = new FileReader();
+    reader.onload = function(){
+        console.log('file successfully loaded')
+        var output = document.getElementById('out');
+        output.innerHTML = reader.result;
+        
+        //convert the csv to a javascript object or array
+        data = file2data(reader.result);
+        
+        //convert the javascript object or array into text
+        data2object(data);
+    };
+    reader.readAsBinaryString(input.files[0]);
+};
+
+function file2data(data){
+    var newValue = ",";
+    var newLine = "\n";
+    // console.log('this:'+newValue + ' this:'+newLine)
+    
+    var lines = data.split(newLine);
+    for (var i = 0; i < lines.length-1; i++){
+        //every last value in each row contains some sort of bad character at the end that isn't "/n"
+        lines[i] = lines[i].split(lines[i].charAt(lines[i].length-1))[0];
+    }
+    var titles = lines[0].split(newLine)[0].split(newValue);
+    var data = new Array(lines.length - 1);
+    
+    
+    // Object with header row and header column
+    for (var i = 1; i < lines.length; i++) { // for every row
+        lines[i] = lines[i].split(newValue);
+        data[lines[i][0]] = {};
+        data[lines[i][0]]["prereqs"] = [];
+        data[lines[i][0]]["terms"] = [];
+        for (var j = 1; j < titles.length; j++) { // for every column
+            if (j == 1) {
+                data[lines[i][0]]["name"] = lines[i][j];
+            } else if (2 <= j && j <= 5) {
+                if (lines[i][j] !== "") {
+                    data[lines[i][0]]["prereqs"].push(lines[i][j]);
+                }
+            } else if (6 <= j && j <= 8) {
+                if (lines[i][j] !== "") {
+                    console.log("here")
+                    data[lines[i][0]]["terms"].push(lines[i][j]);
+                }
+            }
+        }
+    };
+
+    console.log(data);
+    return data;
+}
+
+function data2object(data){
+    var varname = document.getElementById("varname").value;
+
+
+    var text = "var " + varname + " = {";
+            
+    
+    for (courseCode of Object.keys(data)){ // for every row (course)
+        text += courseCode + ": {";
+            text += "name: " + "\"" + data[courseCode]["name"] + "\", ";
+            text += "prereqs: [";
+            for (j of data[courseCode]["prereqs"]) { // for every prereq
+                text += "\"" + j + "\", ";
+            }
+            text += "], ";
+            text += "terms: [";
+            for (j of data[courseCode]["terms"]) { // for every term
+                text += "\"" + j + "\", ";
+            }
+            text += "]"
+        text += "}, ";
+    }
+    
+    text += "};";
+
+    
+    document.getElementById('code').innerHTML = text;
+}
+
+
+
+
+
+function copyToClipboard(element) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(element).text()).select();
+    document.execCommand("copy");
+    $temp.remove();
+}
+function copied(ele){
+    var temp = ele;
+    $(temp).text("Copied");
+}
+
+</script>
+
+
+<style>
+code {
+    background-color: #eee;
+    border: 1px solid #999;
+    display: block;
+    padding: 20px;
+    overflow-wrap: anywhere;
+}
+</style>
+
+
+<body>
+
+<h1>Course Details .csv to .js array</h1><br>
+
+
+
+<label><u>Please fill before importing file</u></label><br><br>
+<label for="varname">variable name:</label>
+<input type="text" id="varname" name="varname" value="courses"><br>
+<input type='file' accept='text/csv' onchange='openFile(event)'><br>
+
+
+<br><br><br><br>
+
+<code id="code">JavaScript array will appear here</code>
+<button id="copyButton" onclick="copied('#copyButton'); copyToClipboard('#code')">Copy Code</button>
+
+<br><br><br>
+
+<p>.csv contents:</p>
+<output id="out">file contents will appear here</output>
+
+<br><br><br>
+<p>example csv table:</p>
+<table class="table table-bordered table-hover table-condensed">
+<thead><tr><th title="Field #1">code</th>
+<th title="Field #2">name</th>
+<th title="Field #3">prereq 1</th>
+<th title="Field #4">prereq 2</th>
+<th title="Field #5">prereq 3</th>
+<th title="Field #6">prereq 4</th>
+<th title="Field #7">term 1</th>
+<th title="Field #8">term 2</th>
+<th title="Field #9">term 3</th>
+</tr></thead>
+<tbody><tr>
+<td>TEST100</td>
+<td>test course 1</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td>Fall</td>
+<td>Spring</td>
+<td>Summer</td>
+</tr>
+<tr>
+<td>TEST101</td>
+<td>test course 2</td>
+<td>TEST100</td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td>Spring</td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td>TEST102</td>
+<td>test course 3</td>
+<td>TEST100</td>
+<td>TEST101</td>
+<td> </td>
+<td> </td>
+<td>Summer</td>
+<td> </td>
+<td> </td>
+</tr>
+</tbody></table>
+<pre>
+code,name,prereq 1,prereq 2,prereq 3,prereq 4,term 1,term 2,term 3
+TEST100,test course 1,,,,,Fall,Spring,Summer
+TEST101,test course 2,TEST100,,,,Spring,,
+TEST102,test course 3,TEST100,TEST101,,,Summer,,
+</pre>
+
+</body>
+
+
+
+
+
+
+
+
