@@ -1,19 +1,51 @@
+
+/* --- z-index log --- */
+.svgContainer   {z-index: 0;}
+.drag       {z-index: 2;}
+.menu       {z-index: 4;}
+.dialogBox  {z-index: 6;}
+
+
+/* --- General Styles --- */
+button {cursor: pointer;}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+a {color:blue;text-decoration:underline;cursor:pointer;}
+
+
+
+
+/* --- Main Content --- */
+#header { grid-area: header; }
+#menu1 { grid-area: menu1; }
+#menu2 { grid-area: menu2; }
+#main { grid-area: main; }
 body {
   margin: 5px;
+  display: grid;
+  grid-template-areas:
+    'header menu1 menu2'
+    'main main main';
+  //grid-template-columns: 1fr auto auto;
+  grid-gap: 20px;
+  //background-color: rgba(33, 150, 243, 0.5);
+  //padding: 10px;
 }
-.darkTheme {
-    background-color: black;
-}
-.darkTheme *:not(div){
-    color: white;
+body > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px 0;
 }
 
+
+
+
+
+/* --- Course Grid --- */
 #grid {
   display: grid;
   grid-gap: 0px;
@@ -23,16 +55,17 @@ body {
   padding: 5px 0px;
   margin: 0px 2%;
   //opacity: 0.5;
-  min-width: 900px;
+  //min-width: 900px;
   max-width: 1400px;
+  //max-height: 80vh;
   grid-auto-flow: dense;
 }
 
 .termLabel {
-  padding: auto;
+  padding: clamp(2px, 0.5em, 10px);
   display: grid;
   place-items: center start;
-  font-size: clamp(10px, 1vw, 15px);
+  font-size: clamp(10px, 2vmin, 15px);
 }
 
 .empty, .drag{
@@ -46,19 +79,18 @@ body {
 }
 .empty {
   //margin: max(12px, 1vw) 10px;
-  margin: clamp(10px, 1vw, 15px) 10px;
+  margin: clamp(10px, 1vmin, 15px) 10px;
   //background-color: white;
   //min-width: 20px;
   display: grid;
   place-items: center;
 }
 .drag {
-  z-index: 9;
   background-color: lightblue;
   text-align: center;
-  padding: 5px;
+  padding: 5px 2px 0px;
   //font-size: max(8px, 1vw);
-  font-size: clamp(8px, 1vw, 15px);
+  font-size: clamp(10px, 0.9vw, 15px);
   font-family: sans-serif;
   //font: 1vw "Comic Sans MS", "Comic Sans", 'Brush Script MT', sans-serif;
   outline: 0.25em solid royalblue;
@@ -68,16 +100,69 @@ body {
   background-color: deeppink !important;
 }
 
-
-#myDIV{
-  position: static;
-  z-index: 9;
-  cursor: move;
-}
-
 .svgContainer {
     position: absolute; 
     top: 0px; 
     left: 0px;
-    z-index: 0;
+}
+
+
+
+
+/* --- Import/Export Dialog Box --- */
+.dialogBox {
+    //display: grid;
+    background-color: rgba(50,50,50,0.6);
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    place-items: center;
+    display: none;
+    cursor: pointer;
+}
+.dialogBox > div {
+    background-color: white;
+    border: 1px solid #999;
+    padding: 10px 10px 0px;
+}
+.dialogBox > div > div {padding: 50px;}
+.dialogBox *:not(button) {
+    cursor: auto;
+}
+.close {
+    float: right;
+    top: 0;
+    right: 0;
+    height: 1.5em;
+    width: 1.5em;
+    font-weight: bold;
+}
+textarea {
+    max-width: 80vw;
+}
+
+pre, code, textarea {
+    background-color: #eee;
+    border: 1px solid #999;
+    display: block;
+    padding: 20px;
+    overflow-wrap: anywhere;
+}
+
+
+
+/* --- Dark Theme --- */
+.darkTheme, .darkTheme > div{
+    background-color: black;
+}
+.darkTheme div *:not(div):not(button){
+    color: white;
+}
+.darkTheme .dialogBox > div {
+    background-color: black;
+}
+.darkTheme pre, .darkTheme textarea{
+    background-color: #222;
 }
