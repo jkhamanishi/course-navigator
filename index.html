@@ -3,37 +3,83 @@
 
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="js/import-export.js"></script>
 <script src="data/default-curriculums.js"></script>
 <script src="data/courseData.js"></script>
-<script src="js/script.js"></script>
+<script src="js/gridLoader.js"></script>
+<script src="js/main.js"></script>
 <link rel="stylesheet" href="css/main.css">
 <title>MSE Course Alligator</title>
 </head>
 
 <body>
 
-<h1>Hello World!</h1>
-<p>This is just a test</p>
-<p>NOTE: has not yet been developed for touch-screen use.</p>
-<br><br>
 
-<div id="grid"></div>
+<div id="header">
+    <h1>MSE Course Navigator</h1>
+    <p>NOTE: This web app is still in development</p>
+    <p>NOTE: This web app has not yet been developed for touch-screen use.</p>
+</div>
 
-<div id="textContainer"></div>
+<div id="menu1" class="menu">
+    <label for="curriculum">Curriculum:</label>
+    <select name="curriculum" id="curriculum" onchange="changeCurriculum()">
+        <option value="fourY">4-Year Curriculum (post-Fall 2014)</option>
+        <option value="flexA" selected>Flexible Curriculum: Option A</option>
+        <option value="flexB">Flexible Curriculum: Option B</option>
+        <option value="flexC">Flexible Curriculum: Option C</option>
+        <option value="import">Import...</option>
+        <option value="custom" hidden>Custom</option>
+    </select><br>
+    <button type="button" onclick="exportCurriculum();">Export</button>
+    <!-- <br><button type="button" onclick="showDialogBox('importDialogBox');">Import</button> -->
+</div>
+
+<div id="menu2" class="menu">
+    <input type="checkbox" id="darktheme" name="darktheme" onchange="setDarkTheme()">
+    <label for="darktheme"> Enable dark mode</label><br>
+</div>
 
 
-<br><br>
 
-<p>click on a course to see details</p>
-<p>you can also move the courses by dragging and dropping</p>
-
-
-<!-- <div id="myDIV" class="drag" width="200px"><div>1</div></div> -->
+<div id="main">
+    <div onclick="scrollToViewGrid()"><a>Scroll to view</a></div>
+    <div id="grid"></div>
+    <div id="allSVGs"></div>
 
 
+    <br><hr><br>
+
+    <p>click on a course to see details</p>
+    <p>you can also move the courses by dragging and dropping</p>
+    
+    
+    <br><hr><br>
+    
+</div>
 
 
-<div id="allSVGs"></div>
+<div id="exportDialogBox" class="dialogBox"><div>
+    <button class="close"
+            onclick="hideDialogBox('exportDialogBox')"> &times </button>
+    <div>
+        <pre id="exportOutput">export code will appear here</pre>
+        <button id="copyExportButton">Copy Contents</button>
+    </div>
+</div></div>
+
+<div id="importDialogBox" class="dialogBox"><div>
+    <button class="close"
+            onclick="hideDialogBox('importDialogBox')"> &times </button>
+    <div>
+        <textarea id="importedCurriculum" rows="20" cols="100"
+                  placeholder="Paste curriculumn here"></textarea>
+        <button id="importButton" >Go!</button>
+        <span id="errorMsg"></span>
+    </div>
+</div></div>
+
+
 
 </body>
 

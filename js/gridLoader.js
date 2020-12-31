@@ -1,22 +1,26 @@
 
 
-function hello() {
-    alert('Hello world! (test successful)');
-};
 
-function log(text){console.log(text)};
-
-
+function availableID(id) {
+    if (!(document.getElementById(id))) {
+        return id;
+    }
+    for (i=2; true; i++) {
+        if (!(document.getElementById(id+i))) {
+            return id+i;
+        }
+    }
+}
 
 // --- Grid Scripts ---
 // --------------------
 
-console.log(flexA); // var flexA from default-curriculums.js
-console.log(courseData); // var courseData from courseData.js
 
 function loadGrid(gridData){
-    var grid = document.getElementById("grid");
+    log(gridData);
+    var grid = docEle("grid");
     grid.innerHTML = "";
+    docEle("allSVGs").innerHTML = "";
 
     grid.style.setProperty('grid-template-columns', "auto "+"1fr ".repeat(gridData[0].length));
 
@@ -24,12 +28,7 @@ function loadGrid(gridData){
         
         for (var j=-1; j<gridData[0].length; j++){ // for every column
             if (j==-1) {
-                var term;
-                switch (i%3) {
-                    case 0: term = "Fall"; break;
-                    case 1: term = "Spring"; break;
-                    case 2: term = "Summer"; break;
-                }
+                var term = term2string(i);
                 var newDIV = document.createElement("DIV");
                 newDIV.classList.add('termLabel');
                 newDIV.innerHTML = "<div>Year "+Math.floor(i/3+1)+" "+term+"</div>";
@@ -52,19 +51,19 @@ function loadGrid(gridData){
             
             if (gridData[i][j] != "") {
                 // Add courses
-                var courseCode = gridData[i][j];
+                var courseCode = availableID(gridData[i][j].replace(/[ -]/g, "")); // inside the [] is a list of characters to be replaced with ""
                 var dragDIV = document.createElement("DIV");
-                dragDIV.innerHTML = courseCode;
+                dragDIV.innerHTML = gridData[i][j];
                 //dragDIV.setAttribute("style", "width: 100px; height: 100px;");
                 //dragDIV.height = "100px";
                 dragDIV.classList.add('drag');
                 dragDIV.setAttribute("draggable", "true");
                 dragDIV.setAttribute("ondragstart", "dragStart(event)");
                 dragDIV.setAttribute("ondrag", "dragging(event)");
-                dragDIV.setAttribute("ondragend", "dragEnd()");
+                dragDIV.setAttribute("ondragend", "dragEnd(event)");
                 dragDIV.setAttribute("onclick", "spotlightCourse(event)");
-                dragDIV.id = courseCode.replace(/ +/g, "");
-                dragDIV.style.setProperty("cursor", "move")
+                dragDIV.id = courseCode
+                dragDIV.style.setProperty("cursor", "pointer")
                 dragDIV.style.display = "initial";
                 newDIV.appendChild(dragDIV);
                 //dragElement(dragDIV);
@@ -109,6 +108,7 @@ function loadGrid(gridData){
         document.getElementById("grid").appendChild(newDIV);
         newDIV.setAttribute("style", "grid-column: 1 / -1;  background-color: "+color+";  grid-row: "+(i+1)+"; z-index: 0;")
     }
+    orientAllArrows();
 }
 
 
@@ -119,7 +119,7 @@ function loadGrid(gridData){
 
 // --- Drag 'n Drop functions ---
 // ------------------------------
-var newlocation = "CHEM120";
+var newlocation;
 var draggedCourse;
 
 
@@ -147,6 +147,7 @@ function dragLeave() {
 // functions for the draggable object
 
 function dragStart(ev) {
+    newlocation = ev.target.id;
     ev.dataTransfer.setData("text", ev.target.id);
     var placeholders = document.getElementsByClassName("empty");
     for (x of placeholders) {x.style.outline = "0.1em dotted grey";}
@@ -162,14 +163,18 @@ function dragging(ev) {
         svg.setAttribute("obj1", newlocation)
         orientArrow(svg);
         svg.setAttribute("obj1", draggedCourse);
-}   }
-function dragEnd() {
+    }
+}
+function dragEnd(ev) {
+    docEle("curriculum").value = "custom"
     orientAllArrows();
     var placeholders = document.getElementsByClassName("empty");
     for (x of placeholders) {
         x.style.backgroundColor = ""; 
         x.style.outline = "";
-}   }
+    }
+    log(ev.target.id+" offered in dropped semester: "+isOffered(ev.target.id))
+}
 
 
 
@@ -344,25 +349,7 @@ function showLeadingTo(course) {
 
 
 
-// --- Auto Run After Page Loaded ---
-// ----------------------------------
 
-
-$(document).ready(function(){
-    //alert('page loaded');
-    loadGrid(flexA);
-    orientAllArrows();
-    
-    // var testDIV = document.createElement("DIV");
-    // document.getElementById("grid").appendChild(testDIV);
-    // testDIV.setAttribute("style", "grid-column: 1 / -1;  background-color: rgba(0, 0, 250, 1);  grid-row: 3; z-index: 0;")
-    
-});
-
-
-$(window).resize(function(){
-    orientAllArrows();
-});
 
 
 
