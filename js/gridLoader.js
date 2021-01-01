@@ -125,7 +125,10 @@ function loadGrid(gridData){
 
 function updateGrid() {
     orientAllArrows(2);
-    updateWatnings();
+    updateWarnings();
+    if (docEle("constantSquishing").checked){
+        squish();
+    }
 }
 
 
@@ -460,7 +463,7 @@ function showWarning(courseId){
     }
 }
 
-function updateWatnings(){
+function updateWarnings(){
     for (x of allCourses){
         showWarning(x.id);
     }
@@ -468,7 +471,33 @@ function updateWatnings(){
 
 
 
+// --- Squish Courses to the Left ---
+// ----------------------------------
 
+function squish() {
+    if (docEle("constantSquishing").parentElement.style.display !== "initial") {
+        docEle("constantSquishing").parentElement.style.display = "initial";
+        docEle("constantSquishing").checked = true;
+        changeCurriculum();
+        docEle("constantSquishing").checked = false;
+    }
+    var slots = document.getElementsByClassName("empty");
+    var leftmost = 0;
+    var currentRow = 0;
+    for (i of slots){
+        if ((i.style.gridRowStart-1) !== currentRow){
+            currentRow = i.style.gridRowStart-1;
+            leftmost = 0;
+        }
+        if (i.firstChild){
+            docEle("empty"+currentRow+"-"+leftmost).appendChild(i.firstChild);
+            leftmost++;
+        }
+    }
+    //updateGrid(); //if constant squishing is enabled, an infinite loop will occur
+    orientAllArrows(2);
+    updateWarnings();
+}
 
 
 

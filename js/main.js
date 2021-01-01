@@ -40,7 +40,6 @@ $(window).resize(function(){
 
 
 
-
 // --- UI Functions ---
 // --------------------
 
@@ -62,9 +61,14 @@ function scrollToViewGrid() {
 
 function changeCurriculum() {
     var value = docEle("curriculum").value;
-    if (value == "import"){
+    if (value == "custom") {
+        return;
+    } else if (value == "import"){
         showDialogBox('importDialogBox');
         docEle("importedCurriculum").focus()
+    } else if (docEle("constantSquishing").checked) {
+        loadGrid(window[value+'_squished']); // window[string] reads string as a global variable
+        docEle("exportButton").style.visibility = "hidden";
     } else {
         loadGrid(window[value]); // window[string] reads string as a global variable
         docEle("exportButton").style.visibility = "hidden";
