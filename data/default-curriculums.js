@@ -7,15 +7,15 @@ var flexA_raw =
 ,,,,,MATH 260,,MATH 251,MSE 110,,,Elective
 MSE 220,,MSE 250,MSE 100,MSE 221,,,,,,,
 MSE 280,,MSE 251,,,MSE 222,MSE 223,,,,,
-MSE 381,,MSE 353,,,,,MSE 311,,,,MSE 300
-,MSE 310,MSE 380,,MSE 320,,,MSE 321,MSE 352,,,
-,,,,,,MSE 210,MSE 4XX,MSE 4XX,MSE 211,,
-CO-OP,,,,,,,,,,,
-CO-OP,,,,,,,,,,,
-,,,,,MSE 410,,Elective,Elective,,MSE 402,
-,,,MSE 312,,MSE 411,,MSE 4XX,MSE 4XX,,,MSE 405W
-CO-OP,,,,,,,,,,,
-,,,,,,,MSE 4XX,MSE 4XX,,,
+,,,,,,,CO-OP,,,,
+,,,,,,,CO-OP,,,,
+,,,,,MSE 210,,Elective,Elective,,,MSE 211
+,MSE 381,MSE 353,MSE 311,,,,,,,,MSE 300
+MSE 310,,MSE 380,,,MSE 320,MSE 321,,,MSE 352,,
+,,,,,,MSE 410,,MSE 4XX,MSE 4XX,MSE 402,
+,,,MSE 312,,,MSE 411,,MSE 4XX,,,MSE 405W
+,,,,,,,CO-OP,,,,
+,,,,,,,,MSE 4XX,MSE 4XX,MSE 4XX,
 ,,,,,,,,,,,
 `;
 
@@ -51,9 +51,9 @@ MSE 381,,MSE 353,,,,,MSE 311,,,,MSE 300
 CO-OP,,,,,,,,,,,
 CO-OP,,,,,,,,,,,
 ,,,,,MSE 410,,Elective,Elective,,MSE 402,
-,,,MSE 312,,MSE 411,,MSE 4XX,MSE 4XX,,,MSE 405W
+,,,MSE 312,,MSE 411,,MSE 4XX,,,,MSE 405W
 CO-OP,,,,,,,,,,,
-,,,,,,,MSE 4XX,MSE 4XX,,,
+,,,,,,,MSE 4XX,MSE 4XX,MSE 4XX,,
 ,,,,,,,,,,,
 `;
 
