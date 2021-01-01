@@ -33,7 +33,7 @@ function exportCurriculum (){
         for (var j=0; j<columns; j++){ // for every column
             if (gridContents[k].className == "termLabel") {k++;}
             if (gridContents[k].firstChild) {
-                text += gridContents[k].firstChild.innerHTML 
+                text += gridContents[k].firstChild.innerText
             }
             k++;
             if (j !== columns - 1) {text += ",";}
