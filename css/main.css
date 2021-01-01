@@ -171,6 +171,6 @@ pre, code, textarea {
 .darkTheme .dialogBox > div {
     background-color: black;
 }
-.darkTheme pre, .darkTheme textarea{
+.darkTheme pre, .darkTheme textarea, .darkTheme select{
     background-color: #222;
 }
