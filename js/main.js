@@ -20,11 +20,13 @@ function notChildren(e, parentId) {if (e.target.id == parentId) {return true;}}
 $(document).ready(function(){
     //alert('page loaded');
     
+    setDarkTheme()
+    
     console.log(courseData); // var courseData from courseData.js
     loadGrid(flexA); // var flexA from default-curriculums.js
     
     assignDialogFunctions();
-    showWarning("MSE312")
+    
 });
 
 
