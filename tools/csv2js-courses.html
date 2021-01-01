@@ -39,21 +39,29 @@ function file2data(data){
     // Object with header row and header column
     for (var i = 1; i < lines.length; i++) { // for every row
         lines[i] = lines[i].split(newValue);
-        data[lines[i][0]] = {};
-        data[lines[i][0]]["prereqs"] = [];
-        data[lines[i][0]]["terms"] = [];
+        var code = lines[i][0];
+        data[code] = {};
+        data[code]["terms"] = [];
+        data[code]["prereqs"] = [];
         for (var j = 1; j < titles.length; j++) { // for every column
             if (j == 1) {
-                data[lines[i][0]]["name"] = lines[i][j];
-            } else if (2 <= j && j <= 5) {
+                data[code]["type"] = lines[i][j];
+            } else if (j == 2) {
+                data[code]["name"] = lines[i][j];
+            } else if (j == 3) {
+                data[code]["units"] = lines[i][j];
+            } else if (4 <= j && j <= 6) {
                 if (lines[i][j] !== "") {
-                    data[lines[i][0]]["prereqs"].push(lines[i][j]);
+                    data[code]["terms"].push(lines[i][j]);
                 }
-            } else if (6 <= j && j <= 8) {
+            } else if (7 <= j && j <= 10) {
                 if (lines[i][j] !== "") {
-                    console.log("here")
-                    data[lines[i][0]]["terms"].push(lines[i][j]);
+                    data[code]["prereqs"].push(lines[i][j]);
                 }
+            } else if (j == 11) {
+                data[code]["concurrentOk"] = lines[i][j];
+            } else if (j == 12) {
+                data[code]["sPrereq"] = lines[i][j];
             }
         }
     };
@@ -71,17 +79,21 @@ function data2object(data){
     
     for (courseCode of Object.keys(data)){ // for every row (course)
         text += courseCode + ": {";
+            text += "type: " + "\"" + data[courseCode]["type"] + "\", ";
             text += "name: " + "\"" + data[courseCode]["name"] + "\", ";
-            text += "prereqs: [";
-            for (j of data[courseCode]["prereqs"]) { // for every prereq
-                text += "\"" + j + "\", ";
-            }
-            text += "], ";
+            text += "units: " + "" + data[courseCode]["units"] + ", ";
             text += "terms: [";
             for (j of data[courseCode]["terms"]) { // for every term
                 text += "\"" + j + "\", ";
             }
-            text += "]"
+            text += "], ";
+            text += "prereqs: [";
+            for (j of data[courseCode]["prereqs"]) { // for every prereq
+                text += "\"" + j + "\", ";
+            }
+            text += "], "
+            text += "concurrentOk: " + "\"" + data[courseCode]["concurrentOk"] + "\", ";
+            text += "sPrereq: " + "\"" + data[courseCode]["sPrereq"] + "\"";
         text += "}, ";
     }
     
