@@ -259,15 +259,20 @@ function orientArrow(svg) {
 
 function orientAllArrows(length = 1) {
     for (var i=0; i < length; i++) {
+        
         var allSVGs = document.getElementsByClassName("svgContainer");
+        var hideArrows = docEle("hideArrows").checked;
+        var spotlightOn = (lastclicked !== "");
+        
         for (svg of allSVGs) {
             orientArrow(svg);
-            if (coursesVisible(svg)) {
+            if (coursesVisible(svg) && (!hideArrows || spotlightOn)) {
                 svg.style.display = "initial";
             } else {
                 svg.style.display = "none";
             }
         }
+        
     }
 }
 
@@ -305,7 +310,7 @@ function coursesVisible(svg) {
 // --- Show/Hide Related Courses and Arrows ---
 // --------------------------------------------
 
-var lastclicked; //course on spotlight
+var lastclicked = ""; //course on spotlight
 
 var allCourses = document.getElementsByClassName("drag");
 
