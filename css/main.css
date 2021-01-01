@@ -100,7 +100,7 @@ body > div {
   font-family: sans-serif;
   //font: 1vw "Comic Sans MS", "Comic Sans", 'Brush Script MT', sans-serif;
   outline: 0.25em solid royalblue;
-  //position: absolute;
+  position: relative;
 }
 .drag:hover {
   background-color: deeppink !important;
@@ -111,6 +111,17 @@ body > div {
     top: 0px; 
     left: 0px;
 }
+
+.warning {
+    display: none;
+    position: absolute;
+    height: 1.5em;
+    width: auto;
+    top: -30%;
+    right: -10%;
+}
+
+
 
 
 
@@ -158,6 +169,7 @@ pre, code, textarea {
     padding: 20px;
     overflow-wrap: anywhere;
 }
+
 
 
 
