@@ -56,25 +56,31 @@ body > div {
   margin: 0px 2%;
   //opacity: 0.5;
   //min-width: 900px;
-  max-width: 1400px;
+  //max-width: 1400px;
   //max-height: 80vh;
   grid-auto-flow: dense;
+  width: clamp(900px, 2vw, 1400px);
 }
 
 .termLabel {
   padding: clamp(2px, 0.5em, 10px);
   display: grid;
   place-items: center start;
-  font-size: clamp(10px, 2vmin, 15px);
+  font-size: clamp(10px, 2vw, 15px);
+  //font-size: clamp(10px, 1vw, 15px);
+  max-height: 2em;
 }
 
 .empty, .drag{
-  min-width: 60px;
-  width: 5vw;
-  max-width: 80px;
-  min-height: 20px;
-  height: 2vw;
-  max-height: 25px;
+  width: clamp(60px, 5vw, 80px);
+  //width: clamp(100px, 5vw, 150px);
+  height: clamp(20px, 2vw, 25px);
+  //min-width: 60px;
+  //width: 5vw;
+  //max-width: 80px;
+  //min-height: 20px;
+  //height: 2vw;
+  //max-height: 25px;
   align-items: center;
 }
 .empty {
@@ -110,6 +116,8 @@ body > div {
 
 
 /* --- Import/Export Dialog Box --- */
+#exportButton{visibility: hidden;}
+
 .dialogBox {
     //display: grid;
     background-color: rgba(50,50,50,0.6);

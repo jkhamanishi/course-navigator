@@ -17,7 +17,7 @@ function availableID(id) {
 
 
 function loadGrid(gridData){
-    log(gridData);
+    //log(gridData);
     var grid = docEle("grid");
     grid.innerHTML = "";
     docEle("allSVGs").innerHTML = "";
@@ -173,6 +173,7 @@ function dragEnd(ev) {
         x.style.backgroundColor = ""; 
         x.style.outline = "";
     }
+    docEle("exportButton").style.visibility = "visible";
     log(ev.target.id+" offered in dropped semester: "+isOffered(ev.target.id))
 }
 

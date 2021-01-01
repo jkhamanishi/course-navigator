@@ -37,7 +37,7 @@ $(document).ready(function(){
 
 $(window).resize(function(){
     orientAllArrows();
-    centerViewGrid();
+    scrollToViewGrid();
 });
 
 
@@ -72,15 +72,18 @@ function changeCurriculum() {
         docEle("importedCurriculum").focus()
     } else {
         loadGrid(window[value]); // window[string] reads string as a global variable
+        docEle("exportButton").style.visibility = "hidden";
     }
 }
 
 
+function currentTerm(courseId){
+    return (docEle(courseId).parentElement.style.gridRowStart) - 1;
+}
 
 function isOffered(courseId){
-    var i = (docEle(courseId).parentElement.style.gridRowStart-1)%3;
-    var currentTerm = term2string(i);
-    return courseData[courseId].terms.includes(currentTerm);
+    var currentTermString = term2string(currentTerm(courseId));
+    return courseData[courseId].terms.includes(currentTermString);
 }
 
 
