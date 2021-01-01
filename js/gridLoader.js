@@ -1,6 +1,5 @@
 
 
-
 function availableID(id) {
     if (!(document.getElementById(id))) {
         return id;
@@ -12,12 +11,23 @@ function availableID(id) {
     }
 }
 
+function term2string(i){
+    switch (i%3) {
+        case 0: term = "Fall"; break;
+        case 1: term = "Spring"; break;
+        case 2: term = "Summer"; break;
+    }
+    return term;
+}
+
+
+
 // --- Grid Scripts ---
 // --------------------
 
 
 function loadGrid(gridData){
-    log(gridData);
+    //log(gridData);
     var grid = docEle("grid");
     grid.innerHTML = "";
     docEle("allSVGs").innerHTML = "";
@@ -66,6 +76,7 @@ function loadGrid(gridData){
                 dragDIV.style.setProperty("cursor", "pointer")
                 dragDIV.style.display = "initial";
                 newDIV.appendChild(dragDIV);
+                addWarning(dragDIV);
                 //dragElement(dragDIV);
                 
                 var prereqs = courseData[courseCode].prereqs;
@@ -108,10 +119,14 @@ function loadGrid(gridData){
         document.getElementById("grid").appendChild(newDIV);
         newDIV.setAttribute("style", "grid-column: 1 / -1;  background-color: "+color+";  grid-row: "+(i+1)+"; z-index: 0;")
     }
-    orientAllArrows();
+    updateGrid();
 }
 
 
+function updateGrid() {
+    orientAllArrows(2);
+    updateWatnings();
+}
 
 
 
@@ -140,7 +155,6 @@ function dragEnter() {
 function dragLeave() {
     //this.style.backgroundColor = "white";
     this.style.backgroundColor = "";
-    //newlocation = draggedCourse;
 }
 
 
@@ -167,13 +181,15 @@ function dragging(ev) {
 }
 function dragEnd(ev) {
     docEle("curriculum").value = "custom"
-    orientAllArrows();
+    updateGrid();
     var placeholders = document.getElementsByClassName("empty");
     for (x of placeholders) {
         x.style.backgroundColor = ""; 
         x.style.outline = "";
     }
-    log(ev.target.id+" offered in dropped semester: "+isOffered(ev.target.id))
+    docEle("exportButton").style.visibility = "visible";
+    
+    //log(ev.target.id+" offered in dropped semester: "+isOffered(ev.target.id))
 }
 
 
@@ -286,14 +302,15 @@ function coursesVisible(svg) {
 
 
 
-// --- Show/Hide Related Courses and Arrows---
-// ----------------------------------
+// --- Show/Hide Related Courses and Arrows ---
+// --------------------------------------------
 
-var lastclicked;
+var lastclicked; //course on spotlight
 
 var allCourses = document.getElementsByClassName("drag");
 
 function spotlightCourse(ev) {
+    if(ev.target.className !== "drag"){return;}
     var course = ev.target;
     if (lastclicked !== course.id){
         lastclicked = course.id;
@@ -344,14 +361,105 @@ function showLeadingTo(course) {
 
 
 
+// --- Course Term Validation ---
+// ------------------------------
+
+function currentTerm(courseId){
+    return (docEle(courseId).parentElement.style.gridRowStart) - 1;
+}
+
+function isOffered(courseId){
+    var currentTermString = term2string(currentTerm(courseId));
+    var result = courseData[courseId].terms.includes(currentTermString);
+    var warning = "";
+    if (!result) {
+        warning = "Warning: "+courseId+" is usually only offered in the ";
+        warning += courseData[courseId].terms[0];
+        if (courseData[courseId].terms.length>1){
+            warning += " and "+courseData[courseId].terms[1];
+        }
+        warning += ".\n"
+    }
+    return [result, warning];
+}
+function prereqsValidated(courseId){
+    var result = true;
+    var warning = ""
+    for (prereq of courseData[courseId].prereqs){
+        var prereqBefore = (currentTerm(prereq) < currentTerm(courseId));
+        var prereqDuring = (currentTerm(prereq) == currentTerm(courseId));
+        var isConcurrentOk = courseData[courseId].concurrentOk.includes(prereq);
+        
+        if ( !prereqBefore && !(prereqDuring && isConcurrentOk) ){
+            result = false;
+            warning += "Warning: "+prereq+" must be taken before ";
+            if (isConcurrentOk){warning += "or concurrently with "};
+            warning += courseId+".\n"
+        }
+    }
+    return [result, warning];
+}
+function isCoop(courseId){
+    var type = courseData[courseId].type;
+    if (type == "coop" || type == "coop option"){
+        return true;
+    } else {
+        return false;
+    }
+    
+}
+function isOnlyCourseInTerm(courseId){ // Used for Co-Op Terms
+    var result = true;
+    var warning = "";
+    for (x of allCourses){
+        if (x.id == courseId){continue;}
+        if (currentTerm(x.id) == currentTerm(courseId)){
+            result = false;
+        }
+    }
+    if (!result){
+        warning += "Warning: Additional courses can not be taken with a ";
+        warning += "co-op practicum without prior consultation with and "
+        warning += "approval from your employer and co-op coordinator.\n";
+        //https://www.sfu.ca/coop/about/guide/work-term.html#:~:text=Enrollment%20in%20Academic%20Courses%20While,employers%20and%20co%2Dop%20coordinators.
+    }
+    return [result, warning];
+}
 
 
+function isValidated(courseId){
+    var warning = ""
+    if (isCoop(courseId)){
+        warning += isOnlyCourseInTerm(courseId)[1];
+    }else{
+        warning += prereqsValidated(courseId)[1];
+        warning += isOffered(courseId)[1];
+    }
+    return [(warning.length == 0), warning];
+}
 
+function addWarning(course){ // Used in loadGrid()
+    var warningSign = document.createElement("IMG");
+    warningSign.src = "img/warning.png";
+    warningSign.className  = "warning";
+    course.append(warningSign);
+}
 
+function showWarning(courseId){
+    if (isValidated(courseId)[0]){
+        docEle(courseId).getElementsByTagName('img')[0].style.display = "none";
+        docEle(courseId).title = "";
+    } else {
+        docEle(courseId).getElementsByTagName('img')[0].style.display = "initial";
+        docEle(courseId).title = isValidated(courseId)[1];
+    }
+}
 
-
-
-
+function updateWatnings(){
+    for (x of allCourses){
+        showWarning(x.id);
+    }
+}
 
 
 

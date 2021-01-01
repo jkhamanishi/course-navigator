@@ -6,6 +6,7 @@ function getContent(url, content, outputId){
         // Success response
         var $mainbar = $(html).find(content);
         $(outputId).text($mainbar.html());
+        $(outputId).append(" (<a href='"+url+"' target='_blank'>source</a>)");
     }, function () {
         // Error response
         $(outputId).text('Access denied');
@@ -34,14 +35,14 @@ getContent(url2, content2, outputId2);
 <body>
 <h1>MSE 490 Spring 2021</h1>
 
-<p><b>Course Topic:</b> <span id="courseTopic"></span></p>
+<p><b>Course Topic:</b> <span id="courseTopic"><i>Content Loading...</i></span></p>
 
 
 
 <p>
 <b>Course Details:</b>
 <br>
-<span id="courseDetails"></span>
+<span id="courseDetails"><i>Content Loading...</i></span>
 
 
 

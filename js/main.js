@@ -9,14 +9,6 @@ function log(text){console.log(text);};
 function docEle(id) {return document.getElementById(id)}
 function notChildren(e, parentId) {if (e.target.id == parentId) {return true;}}
 
-function term2string(i){
-    switch (i%3) {
-        case 0: term = "Fall"; break;
-        case 1: term = "Spring"; break;
-        case 2: term = "Summer"; break;
-    }
-    return term;
-}
 
 
 
@@ -32,12 +24,13 @@ $(document).ready(function(){
     loadGrid(flexA); // var flexA from default-curriculums.js
     
     assignDialogFunctions();
+    showWarning("MSE312")
 });
 
 
 $(window).resize(function(){
-    orientAllArrows();
-    centerViewGrid();
+    updateGrid();
+    scrollToViewGrid();
 });
 
 
@@ -72,16 +65,12 @@ function changeCurriculum() {
         docEle("importedCurriculum").focus()
     } else {
         loadGrid(window[value]); // window[string] reads string as a global variable
+        docEle("exportButton").style.visibility = "hidden";
     }
 }
 
 
 
-function isOffered(courseId){
-    var i = (docEle(courseId).parentElement.style.gridRowStart-1)%3;
-    var currentTerm = term2string(i);
-    return courseData[courseId].terms.includes(currentTerm);
-}
 
 
 

@@ -2,15 +2,15 @@ course 1,course 2,course 3,course 4,course 5,course 6,course 7,course 8,course 9
 CHEM 120,,PHYS 140,,,,,MATH 151,,CMPT 130,,
 ,,PHYS 141,,,MATH 232,,MATH 152,,,MSE 102,MSE 101W
 ,,,,,MATH 260,,MATH 251,MSE 110,,,Elective
-MSE 220,MSE 100,MSE 250,,MSE 221,,,,,,,
+MSE 220,,MSE 250,MSE 100,MSE 221,,,,,,,
 MSE 280,,MSE 251,,,MSE 222,MSE 223,,,,,
 ,,,,,,,CO-OP,,,,
 ,,,,,,,CO-OP,,,,
 ,,,,,MSE 210,,Elective,Elective,,,MSE 211
-MSE 381,,MSE 353,,MSE 311,,,,,,,MSE 300
-,MSE 310,MSE 320,MSE 380,,,MSE 321,,,MSE 352,,
-,,MSE 410,,,,,,MSE 4XX,MSE 4XX,MSE 402,
-,,MSE 411,,,,,MSE 312,,,MSE 4XX,MSE 405W
+,MSE 381,MSE 353,MSE 311,,,,,,,,MSE 300
+MSE 310,,MSE 380,,,MSE 320,MSE 321,,,MSE 352,,
+,,,,,,MSE 410,,MSE 4XX,MSE 4XX,MSE 402,
+,,,MSE 312,,,MSE 411,,MSE 4XX,,,MSE 405W
 ,,,,,,,CO-OP,,,,
-,,,,,,,,,MSE 4XX,MSE 4XX,MSE 4XX
+,,,,,,,,MSE 4XX,MSE 4XX,MSE 4XX,
 ,,,,,,,,,,,
