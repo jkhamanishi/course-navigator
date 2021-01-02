@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="js/import-export.js"></script>
@@ -31,8 +30,9 @@
         <option value="import">Import...</option>
         <option value="custom" hidden>Custom</option>
     </select><br>
-    <button type="button" id="exportButton" onclick="exportCurriculum();">Export</button>
+    <button type="button" id="exportButton" onclick="exportCurriculum();">Export</button><br>
     <!-- <br><button type="button" onclick="showDialogBox('importDialogBox');">Import</button> -->
+    <a onclick="showDialogBox('helpDialogBox')">help</a>
 </div>
 
 <div id="menu2" class="menu">
@@ -40,7 +40,7 @@
     <label for="darktheme">Enable dark mode</label><br>
     <input type="checkbox" id="hideArrows" name="hideArrows" onchange="orientAllArrows(2)">
     <label for="hideArrows">Hide arrows</label><br>
-    <hr>
+    
     <button type="button" id="squish" onclick="squish()">Squish courses left</button><br>
     <div><input type="checkbox" id="constantSquishing" name="constantSquishing" onchange="squish()">
     <label for="constantSquishing">Constant squishing</label></div><br>
@@ -49,20 +49,30 @@
 
 
 <div id="main">
-    <div onclick="scrollToViewGrid()"><a>Scroll to view</a></div>
+    <a onclick="scrollToViewGrid()">Scroll to view</a>
     <div id="grid"></div>
     <div id="allSVGs"></div>
-
-
-    <br><hr><br>
-
-    <p>click on a course to see details</p>
-    <p>you can also move the courses around by dragging and dropping</p>
+    <br>
     
-    
-    <br><hr><br>
+    <div id="details">
+        <h2><span id="code"></span><span id="name"></span> <span id="units"></span></h2>
+        <div id="sideDetails" style="display: none;">
+            <input type="checkbox" id="detailInput" onchange="moveDetails()">
+            <label for="detailInput">Display details on side</label>
+            <br>
+        </div>
+        <br>
+        <div id="warning"></div>
+        <p>Prerequisite(s): <span id="prereqs"></span></p>
+        <p>Typically offered terms(s): <span id="terms"></span></p>
+        <br>
+
+    </div>
     
 </div>
+
+
+
 
 
 <div id="exportDialogBox" class="dialogBox"><div>
@@ -89,7 +99,19 @@
     </div>
 </div></div>
 
-
+<div id="helpDialogBox" class="dialogBox"><div>
+    <button class="close"
+            onclick="hideDialogBox('helpDialogBox')">
+            &times 
+    </button>
+    <div>
+        <ul>
+          <li>click on a course to see details</li>
+          <li>you can also move the courses around by dragging and dropping</li>
+          <li>drink milk</li>
+        </ul>
+    </div>
+</div></div>
 
 </body>
 

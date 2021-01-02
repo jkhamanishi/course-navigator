@@ -3,11 +3,13 @@
 .svgContainer   {z-index: 0;}
 .drag       {z-index: 2;}
 .menu       {z-index: 4;}
+.sideDetails{z-index: 4;}
 .dialogBox  {z-index: 6;}
 
 
+
 /* --- General Styles --- */
-button {cursor: pointer;}
+button, label, input, select {cursor: pointer;}
 
 * {
   box-sizing: border-box;
@@ -18,7 +20,10 @@ button {cursor: pointer;}
 a {color:blue;text-decoration:underline;cursor:pointer;}
 
 
-
+/* body { */
+  /* margin-left: auto; */
+  /* margin-right: auto; */
+/* } */
 
 /* --- Main Content --- */
 #header { grid-area: header; }
@@ -31,14 +36,21 @@ body {
   grid-template-areas:
     'header menu1 menu2'
     'main main main';
-  //grid-template-columns: 1fr auto auto;
-  grid-gap: 20px;
+  grid-template-columns: auto 1fr 1fr;
+  grid-gap: 10px;
   //background-color: rgba(33, 150, 243, 0.5);
-  //padding: 10px;
+  //padding: 10px 0;
+  max-width: 1350px;
 }
 body > div {
   background-color: rgba(255, 255, 255, 0.8);
-  padding: 10px 0;
+  //padding: 10px 0;
+}
+#header{
+    padding: 0 20px 0 0;
+}
+.menu {
+    padding: 5px 0 0;
 }
 #squish ~ div{display: none;}
 
@@ -72,7 +84,7 @@ body > div {
 }
 
 .empty, .drag{
-  width: clamp(60px, 5vw, 80px);
+  width: clamp(50px, 5vw, 80px);
   //width: clamp(100px, 5vw, 150px);
   height: clamp(20px, 2vw, 25px);
   //min-width: 60px;
@@ -96,7 +108,7 @@ body > div {
   text-align: center;
   padding: 5px 2px 0px;
   //font-size: max(8px, 1vw);
-  font-size: clamp(10px, 0.9vw, 15px);
+  font-size: clamp(8px, 0.9vw, 15px);
   font-family: sans-serif;
   //font: 1vw "Comic Sans MS", "Comic Sans", 'Brush Script MT', sans-serif;
   outline: 0.25em solid royalblue;
@@ -119,9 +131,40 @@ body > div {
     width: auto;
     top: -30%;
     right: -10%;
+    cursor: help;
 }
 
 
+
+/* --- Details --- */
+//#main{position: relative;}
+#details img {
+    height: 1em; 
+    vertical-align:text-top; 
+    //display: none;
+}
+.sideDetails{
+    outline: 2px solid;
+    position: absolute;
+    height: 100%;
+    width: 10vw;
+    top: 0;
+    right: 0;
+    resize: horizontal;
+    overflow: auto;
+    direction: rtl;
+}
+.sideDetails * {
+    position: inline;
+    direction: ltr;
+}
+.sideDetails:after{
+    direction: ltr;
+    position: absolute;
+    left: 0.8em;
+    bottom: 0;
+    content: "you can resize this side panel here";
+}
 
 
 

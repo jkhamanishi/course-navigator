@@ -72,6 +72,8 @@ function loadGrid(gridData){
                 dragDIV.setAttribute("ondrag", "dragging(event)");
                 dragDIV.setAttribute("ondragend", "dragEnd(event)");
                 dragDIV.setAttribute("onclick", "spotlightCourse(event)");
+                dragDIV.setAttribute("onmouseenter", "showDetails(event.target.id)");
+                dragDIV.setAttribute("onmouseleave", "showDetails()");
                 dragDIV.id = courseCode
                 dragDIV.style.setProperty("cursor", "pointer")
                 dragDIV.style.display = "initial";
@@ -124,6 +126,7 @@ function loadGrid(gridData){
 
 
 function updateGrid() {
+    moveDetails();
     orientAllArrows(2);
     updateWarnings();
     if (docEle("constantSquishing").checked){
@@ -192,7 +195,8 @@ function dragEnd(ev) {
     }
     docEle("exportButton").style.visibility = "visible";
     
-    //log(ev.target.id+" offered in dropped semester: "+isOffered(ev.target.id))
+    //log(ev.target.id+" offered in dropped semester: "+isOffered(ev.target.id));
+    showDetails(ev.target.id);
 }
 
 
@@ -317,7 +321,7 @@ var lastclicked = ""; //course on spotlight
 
 var allCourses = document.getElementsByClassName("drag");
 
-function spotlightCourse(ev) {
+function spotlightCourse(ev){
     if(ev.target.className !== "drag"){return;}
     var course = ev.target;
     if (lastclicked !== course.id){
@@ -386,13 +390,14 @@ function isOffered(courseId){
         if (courseData[courseId].terms.length>1){
             warning += " and "+courseData[courseId].terms[1];
         }
-        warning += ".\n"
+        warning += "."
     }
     return [result, warning];
 }
 function prereqsValidated(courseId){
     var result = true;
     var warning = ""
+    var warningArray = [];
     for (prereq of courseData[courseId].prereqs){
         var prereqBefore = (currentTerm(prereq) < currentTerm(courseId));
         var prereqDuring = (currentTerm(prereq) == currentTerm(courseId));
@@ -400,12 +405,13 @@ function prereqsValidated(courseId){
         
         if ( !prereqBefore && !(prereqDuring && isConcurrentOk) ){
             result = false;
-            warning += "Warning: "+prereq+" must be taken before ";
+            warning = "Warning: "+prereq+" must be taken before ";
             if (isConcurrentOk){warning += "or concurrently with "};
-            warning += courseId+".\n"
+            warning += courseId+"."
+            warningArray.push(warning);
         }
     }
-    return [result, warning];
+    return [result, warningArray];
 }
 function isCoop(courseId){
     var type = courseData[courseId].type;
@@ -426,9 +432,9 @@ function isOnlyCourseInTerm(courseId){ // Used for Co-Op Terms
         }
     }
     if (!result){
-        warning += "Warning: Additional courses can not be taken with a ";
-        warning += "co-op practicum without prior consultation with and "
-        warning += "approval from your employer and co-op coordinator.\n";
+        warning += "Warning: Additional courses can not be taken during a ";
+        warning += "co-op practicum without prior consultation and "
+        warning += "approval from your employer and co-op coordinator.";
         //https://www.sfu.ca/coop/about/guide/work-term.html#:~:text=Enrollment%20in%20Academic%20Courses%20While,employers%20and%20co%2Dop%20coordinators.
     }
     return [result, warning];
@@ -436,12 +442,18 @@ function isOnlyCourseInTerm(courseId){ // Used for Co-Op Terms
 
 
 function isValidated(courseId){
-    var warning = ""
+    var warning = [];
     if (isCoop(courseId)){
-        warning += isOnlyCourseInTerm(courseId)[1];
+        if (!isOnlyCourseInTerm(courseId)[0]){
+            warning.push(isOnlyCourseInTerm(courseId)[1]);
+        }
     }else{
-        warning += prereqsValidated(courseId)[1];
-        warning += isOffered(courseId)[1];
+        if (!prereqsValidated(courseId)[0]){
+            for (x of prereqsValidated(courseId)[1]){warning.push(x);}
+        }
+        if (!isOffered(courseId)[0]){
+            warning.push(isOffered(courseId)[1]);
+        }
     }
     return [(warning.length == 0), warning];
 }
@@ -459,7 +471,10 @@ function showWarning(courseId){
         docEle(courseId).title = "";
     } else {
         docEle(courseId).getElementsByTagName('img')[0].style.display = "initial";
-        docEle(courseId).title = isValidated(courseId)[1];
+        docEle(courseId).title = "";
+        for (x of isValidated(courseId)[1]){
+            docEle(courseId).title += x + "\n";
+        }
     }
 }
 
@@ -476,6 +491,9 @@ function updateWarnings(){
 
 function squish() {
     if (docEle("constantSquishing").parentElement.style.display !== "initial") {
+        if (!confirm("Warning: moving all courses to the left cannot be undone (unless it is a pre-made curriculum). Are you sure you want to do this?")){
+            return;
+        }
         docEle("constantSquishing").parentElement.style.display = "initial";
         docEle("constantSquishing").checked = true;
         changeCurriculum();

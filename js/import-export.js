@@ -162,16 +162,21 @@ function hideDialogBox(dialogBoxId) {
 
 // Called in "Automated Section" of main.js
 function assignDialogFunctions() {
+    
+    // click outside dialog box
+    for (x of document.getElementsByClassName("dialogBox")){
+        x.addEventListener("click", function(event) {
+            if (notChildren(event, this.id)) {
+                hideDialogBox(this.id);
+            }
+        });
+    }
+    
+    
     // --- Export Dialog Box---
     // click [Copy] button
     docEle("copyExportButton").addEventListener("click", function() {
         copy('exportOutput', 'copyExportButton')
-    });
-    // click outside dialog box
-    docEle("exportDialogBox").addEventListener("click", function(event) {
-        if (notChildren(event, this.id)) {
-            hideDialogBox("exportDialogBox");
-        }
     });
     
     
@@ -187,12 +192,6 @@ function assignDialogFunctions() {
             docEle("errorMsg").innerHTML = "invalid input format"
         }
         docEle("curriculum").value = "custom"
-    });
-    // click outside dialog box
-    docEle("importDialogBox").addEventListener("click", function(event) {
-        if (notChildren(event, this.id)) {
-            hideDialogBox("importDialogBox");
-        }
     });
 }
 
