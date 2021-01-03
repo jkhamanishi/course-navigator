@@ -1,9 +1,10 @@
 // --- Export Functions ---
 // ------------------------
 
-function exportCurriculum (){
-    showDialogBox("exportDialogBox");
-    
+function exportCurriculum (copyData = true){
+    if (copyData) {
+        showDialogBox("exportDialogBox");
+    }
     var exportOutput = document.getElementById("exportOutput");
     
     var grid = document.getElementById("grid");
@@ -43,8 +44,10 @@ function exportCurriculum (){
     
     //log(text);
     exportOutput.textContent = text;
-    copy('exportOutput', 'copyExportButton'); //automatically copy to clipboard
-    
+    if (copyData) {
+        copy('exportOutput', 'copyEx    portButton'); //automatically copy to clipboard
+    }
+    return text;
 }
 
 

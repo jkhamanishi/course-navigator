@@ -29,9 +29,16 @@
         <option value="flexC">Flexible Curriculum: Option C</option>
         <option value="import">Import...</option>
         <option value="custom" hidden>Custom</option>
-    </select><br>
-    <button type="button" id="exportButton" onclick="exportCurriculum();">Export</button><br>
+    </select>
+    <br>
+    <button type="button" id="exportButton" onclick="exportCurriculum();">Export</button>
+    <br>
     <!-- <br><button type="button" onclick="showDialogBox('importDialogBox');">Import</button> -->
+    <div id="sideDetails" style="display: none;">
+        <input type="checkbox" id="detailInput" onchange="moveDetails()">
+        <label for="detailInput">Display details on side</label>
+        <br>
+    </div>
     <a onclick="showDialogBox('helpDialogBox')">help</a>
 </div>
 
@@ -54,20 +61,20 @@
     <div id="allSVGs"></div>
     <br>
     
-    <div id="details">
-        <h2><span id="code"></span><span id="name"></span> <span id="units"></span></h2>
-        <div id="sideDetails" style="display: none;">
-            <input type="checkbox" id="detailInput" onchange="moveDetails()">
-            <label for="detailInput">Display details on side</label>
-            <br>
-        </div>
+    <div id="details"><div>
+        <p style="font-size: 0.6em;"></p>
+        <div id="selectCourse"></div>
+        <h2><span id="code"></span><span id="name">Course Name</span> <span id="units"></span></h2>
         <br>
         <div id="warning"></div>
-        <p>Prerequisite(s): <span id="prereqs"></span></p>
-        <p>Typically offered terms(s): <span id="terms"></span></p>
+        
+        <div id="options">Options:</div>
+        
+        <p><b>Prerequisite(s): </b><span id="prereqs">???</span></p>
+        <p><b>Typically offered terms(s): </b><span id="terms">???</span></p>
         <br>
 
-    </div>
+    </div></div>
     
 </div>
 

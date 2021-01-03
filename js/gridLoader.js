@@ -75,7 +75,6 @@ function loadGrid(gridData){
                 dragDIV.setAttribute("onmouseenter", "showDetails(event.target.id)");
                 dragDIV.setAttribute("onmouseleave", "showDetails()");
                 dragDIV.id = courseCode
-                dragDIV.style.setProperty("cursor", "pointer")
                 dragDIV.style.display = "initial";
                 newDIV.appendChild(dragDIV);
                 addWarning(dragDIV);
@@ -132,6 +131,11 @@ function updateGrid() {
     if (docEle("constantSquishing").checked){
         squish();
     }
+}
+
+function reloadGrid(){
+    loadGrid(csv2jsData(exportCurriculum(false),4));
+    scrollToViewGrid();
 }
 
 
@@ -342,6 +346,7 @@ function spotlightCourse(ev){
         orientAllArrows();
         lastclicked = "";
         orientAllArrows(2); 
+        //reloadGrid();
     }
 }
 

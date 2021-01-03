@@ -83,7 +83,7 @@ body > div {
   max-height: 2em;
 }
 
-.empty, .drag{
+.empty, .drag, .dragDummy{
   width: clamp(50px, 5vw, 80px);
   //width: clamp(100px, 5vw, 150px);
   height: clamp(20px, 2vw, 25px);
@@ -103,7 +103,7 @@ body > div {
   display: grid;
   place-items: center;
 }
-.drag {
+.drag, .dragDummy {
   background-color: lightblue;
   text-align: center;
   padding: 5px 2px 0px;
@@ -113,6 +113,7 @@ body > div {
   //font: 1vw "Comic Sans MS", "Comic Sans", 'Brush Script MT', sans-serif;
   outline: 0.25em solid royalblue;
   position: relative;
+  cursor: pointer;
 }
 .drag:hover {
   background-color: deeppink !important;
@@ -144,26 +145,44 @@ body > div {
     //display: none;
 }
 .sideDetails{
-    outline: 2px solid;
+    //outline: 2px solid;
+    outline: 0.1em dotted grey;
     position: absolute;
     height: 100%;
     width: 10vw;
     top: 0;
     right: 0;
     resize: horizontal;
-    overflow: auto;
+    overflow: hidden;
     direction: rtl;
 }
-.sideDetails * {
-    position: inline;
+.sideDetails *:not(#options) {
     direction: ltr;
 }
+.sideDetails #options {
+    direction: ltr;
+    white-space: nowrap;
+}
+.sideDetails #options p {
+    white-space: normal;
+}
+.sideDetails #options > div{
+    overflow: auto;
+}
 .sideDetails:after{
+    display: block;
     direction: ltr;
     position: absolute;
     left: 0.8em;
     bottom: 0;
-    content: "you can resize this side panel here";
+    font-size: 0.8em;
+    content: "you can resize the side panel here";
+}
+
+.dragDummy{
+    display: inline-block;
+    //display: none;
+    margin: clamp(10px, 1vmin, 15px) 10px;
 }
 
 

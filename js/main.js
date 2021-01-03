@@ -127,29 +127,26 @@ function showDetails(courseId){
         if (lastclicked == ""){
             return;
         } else {
+            docEle("details").getElementsByTagName("P")[0].innerHTML = "Last clicked:"
             id = lastclicked;
         }
+    } else if (!docEle(courseId)){
+        docEle("details").getElementsByTagName("P")[0].innerHTML = "Preview Option:"
+        id = courseId;
     } else {
-        id = courseId
+        docEle("details").getElementsByTagName("P")[0].innerHTML = "Last hovered:"
+        id = courseId;
     }
     
     // Course title
     switch (courseData[id].type) {
-        case "course":{
-            docEle("code").innerHTML = id+": ";
-            docEle("name").innerHTML = courseData[id].name;
-            docEle("units").innerHTML = "("+courseData[id].units+")";
-            break;
-        }
-        case "coop":
-        case "coop option":{
+        case "coop":{
             docEle("code").innerHTML = "Co-Op Term";
             docEle("name").innerHTML = ""
             docEle("units").innerHTML = "";
             break;
         }
-        case "technical elective":
-        case "technical elective option":{
+        case "technical elective":{
             docEle("code").innerHTML = "Technical Elective";
             docEle("name").innerHTML = ""
             docEle("units").innerHTML = "";
@@ -164,13 +161,17 @@ function showDetails(courseId){
         default:{
             docEle("code").innerHTML = id+": ";
             docEle("name").innerHTML = courseData[id].name;
-            docEle("units").innerHTML = "("+courseData[id].units+")";
+            var units = courseData[id].units;
+            if (units > 0){docEle("units").innerHTML = "("+courseData[id].units+")";} 
+            else {docEle("units").innerHTML = "";}
             break;
         }
     }
     
     // Warning
-    if (!isValidated(id)[0]){
+    if (!docEle(id)) {
+        docEle("warning").innerHTML = "";
+    }else if (!isValidated(id)[0]){
         var warningSign = '<img src="img/warning.png"/>';
         docEle("warning").innerHTML = "";
         for (x of isValidated(id)[1]){
@@ -180,6 +181,57 @@ function showDetails(courseId){
     } else {
         docEle("warning").innerHTML = "";
     }
+    
+    
+    // Options
+    switch (courseData[id].type) {
+        case "coop":
+        case "coop option":
+        case "technical elective":
+        case "technical elective option":{
+            docEle("options").style.display = "block";
+            docEle("options").innerHTML = "<p>Options (click to see details):</p><div></div>";
+            for (x of courseData[id].options){
+                showOption(x);
+            }
+            break;
+        }
+        default:{
+            docEle("options").style.display = "none";
+            // docEle("options").style.display = "block";
+            
+            break;
+        }
+    }
+    function showOption(option){
+        var newDIV = document.createElement("DIV");
+        newDIV.innerHTML = option;
+        newDIV.classList.add('dragDummy');
+        //newDIV.setAttribute("onclick", "showDetails('"+option+"')"+replaceCourseText());
+        newDIV.setAttribute("onclick", "showDetails('"+option+"')");
+        newDIV.title = courseData[option].name;
+        docEle("options").getElementsByTagName("DIV")[0].appendChild(newDIV);
+        
+        // function replaceCourseText(){
+            // if (!(lastclicked == "")){
+                // return ""//"; setAsCourse('"+lastclicked+"', '"+option+"')"
+            // }
+            // return ""
+        // }
+    }    
+    // Replace current selected course with option
+    docEle("selectCourse").innerHTML = "";
+    if (lastclicked !== ""){
+        var showType = courseData[id].type;
+        var clickedType = courseData[lastclicked].type;
+        if ((showType == clickedType+" option")||(clickedType == showType+" option")||((showType == clickedType)&&(showType.includes("option")))){
+            var button = document.createElement("BUTTON");
+            button.innerHTML = "choose this option";
+            button.setAttribute("onclick", "setAsCourse('"+lastclicked+"', '"+id+"')");
+            docEle("selectCourse").appendChild(button);
+        }
+    }
+    
     
     // Prereqs
     docEle("prereqs").innerHTML = ""
@@ -226,6 +278,17 @@ function showDetails(courseId){
     
 }
 
+function setAsCourse(oldCourse, newCourse) {
+    text = ""
+    parts = newCourse.split(/(\d+)/);
+    for (i in parts){
+        if (i == 0){text = parts[i]+" "}
+        else{text += parts[i]}
+    }
+    docEle(oldCourse).innerHTML = text;
+    lastclicked = "";
+    reloadGrid();
+}
 
 
 
