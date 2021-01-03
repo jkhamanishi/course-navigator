@@ -1,9 +1,10 @@
 // --- Export Functions ---
 // ------------------------
 
-function exportCurriculum (){
-    showDialogBox("exportDialogBox");
-    
+function exportCurriculum (copyData = true){
+    if (copyData) {
+        showDialogBox("exportDialogBox");
+    }
     var exportOutput = document.getElementById("exportOutput");
     
     var grid = document.getElementById("grid");
@@ -33,7 +34,7 @@ function exportCurriculum (){
         for (var j=0; j<columns; j++){ // for every column
             if (gridContents[k].className == "termLabel") {k++;}
             if (gridContents[k].firstChild) {
-                text += gridContents[k].firstChild.innerHTML 
+                text += gridContents[k].firstChild.innerText
             }
             k++;
             if (j !== columns - 1) {text += ",";}
@@ -43,8 +44,10 @@ function exportCurriculum (){
     
     //log(text);
     exportOutput.textContent = text;
-    copy('exportOutput', 'copyExportButton'); //automatically copy to clipboard
-    
+    if (copyData) {
+        copy('exportOutput', 'copyEx    portButton'); //automatically copy to clipboard
+    }
+    return text;
 }
 
 
@@ -162,16 +165,21 @@ function hideDialogBox(dialogBoxId) {
 
 // Called in "Automated Section" of main.js
 function assignDialogFunctions() {
+    
+    // click outside dialog box
+    for (x of document.getElementsByClassName("dialogBox")){
+        x.addEventListener("click", function(event) {
+            if (notChildren(event, this.id)) {
+                hideDialogBox(this.id);
+            }
+        });
+    }
+    
+    
     // --- Export Dialog Box---
     // click [Copy] button
     docEle("copyExportButton").addEventListener("click", function() {
         copy('exportOutput', 'copyExportButton')
-    });
-    // click outside dialog box
-    docEle("exportDialogBox").addEventListener("click", function(event) {
-        if (notChildren(event, this.id)) {
-            hideDialogBox("exportDialogBox");
-        }
     });
     
     
@@ -187,12 +195,6 @@ function assignDialogFunctions() {
             docEle("errorMsg").innerHTML = "invalid input format"
         }
         docEle("curriculum").value = "custom"
-    });
-    // click outside dialog box
-    docEle("importDialogBox").addEventListener("click", function(event) {
-        if (notChildren(event, this.id)) {
-            hideDialogBox("importDialogBox");
-        }
     });
 }
 

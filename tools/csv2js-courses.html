@@ -43,6 +43,7 @@ function file2data(data){
         data[code] = {};
         data[code]["terms"] = [];
         data[code]["prereqs"] = [];
+        data[code]["options"] = [];
         for (var j = 1; j < titles.length; j++) { // for every column
             if (j == 1) {
                 data[code]["type"] = lines[i][j];
@@ -62,6 +63,10 @@ function file2data(data){
                 data[code]["concurrentOk"] = lines[i][j];
             } else if (j == 12) {
                 data[code]["sPrereq"] = lines[i][j];
+            } else if (j >= 13) {
+                if (lines[i][j] !== "") {
+                    data[code]["options"].push(lines[i][j]);
+                }
             }
         }
     };
@@ -93,7 +98,12 @@ function data2object(data){
             }
             text += "], "
             text += "concurrentOk: " + "\"" + data[courseCode]["concurrentOk"] + "\", ";
-            text += "sPrereq: " + "\"" + data[courseCode]["sPrereq"] + "\"";
+            text += "sPrereq: " + "\"" + data[courseCode]["sPrereq"] + "\", ";
+            text += "options: [";
+            for (j of data[courseCode]["options"]) { // for every prereq
+                text += "\"" + j + "\", ";
+            }
+            text += "]"
         text += "}, ";
     }
     
@@ -101,6 +111,7 @@ function data2object(data){
 
     
     document.getElementById('code').innerHTML = text;
+    copyToClipboard("#code");
 }
 
 
@@ -156,6 +167,7 @@ code {
 <output id="out">file contents will appear here</output>
 
 <br><br><br>
+<h3>Warning: below example is outdated</h3>
 <p>example csv table:</p>
 <table class="table table-bordered table-hover table-condensed">
 <thead><tr><th title="Field #1">code</th>

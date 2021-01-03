@@ -12,7 +12,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     CMPT130: {
         type: "course",
@@ -21,7 +22,8 @@ var courseData = {
         terms: ["Fall", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     COOP: {
         type: "coop",
@@ -30,7 +32,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: ["MSE293", "MSE294", "MSE393", "MSE394", "MSE493", "MSE494", ]
     },
     COOP2: {
         type: "coop",
@@ -39,7 +42,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: ["MSE293", "MSE294", "MSE393", "MSE394", "MSE493", "MSE494", ]
     },
     COOP3: {
         type: "coop",
@@ -48,7 +52,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: ["MSE293", "MSE294", "MSE393", "MSE394", "MSE493", "MSE494", ]
     },
     COOP4: {
         type: "coop",
@@ -57,7 +62,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: ["MSE293", "MSE294", "MSE393", "MSE394", "MSE493", "MSE494", ]
     },
     Elective: {
         type: "complementary elective",
@@ -66,7 +72,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "???",
+        options: []
     },
     Elective2: {
         type: "complementary elective",
@@ -75,7 +82,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "???",
+        options: []
     },
     Elective3: {
         type: "complementary elective",
@@ -84,7 +92,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "???",
+        options: []
     },
     MATH151: {
         type: "course",
@@ -93,7 +102,8 @@ var courseData = {
         terms: ["Fall", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     MATH152: {
         type: "course",
@@ -102,7 +112,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: ["MATH151", ],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     MATH232: {
         type: "course",
@@ -111,7 +122,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: ["MATH151", ],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     MATH251: {
         type: "course",
@@ -120,7 +132,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: ["MATH152", "MATH232", ],
         concurrentOk: "MATH232",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     MATH260: {
         type: "course",
@@ -129,7 +142,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: ["MATH232", "MATH152", ],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     MSE100: {
         type: "course",
@@ -138,7 +152,8 @@ var courseData = {
         terms: ["Fall", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     MSE101W: {
         type: "course",
@@ -147,7 +162,8 @@ var courseData = {
         terms: ["Fall", "Spring", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     MSE102: {
         type: "course",
@@ -156,7 +172,8 @@ var courseData = {
         terms: ["Fall", "Spring", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     MSE110: {
         type: "course",
@@ -165,7 +182,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     MSE210: {
         type: "course",
@@ -174,7 +192,8 @@ var courseData = {
         terms: ["Spring", ],
         prereqs: ["PHYS141", "MATH151", ],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     MSE211: {
         type: "course",
@@ -183,7 +202,8 @@ var courseData = {
         terms: ["Spring", ],
         prereqs: ["MATH232", "MATH152", ],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     MSE220: {
         type: "course",
@@ -192,7 +212,8 @@ var courseData = {
         terms: ["Fall", ],
         prereqs: ["CHEM120", "PHYS140", ],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     MSE221: {
         type: "course",
@@ -201,7 +222,8 @@ var courseData = {
         terms: ["Fall", ],
         prereqs: ["PHYS140", "MATH152", ],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     MSE222: {
         type: "course",
@@ -210,7 +232,8 @@ var courseData = {
         terms: ["Spring", ],
         prereqs: ["PHYS140", "MATH260", ],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     MSE223: {
         type: "course",
@@ -219,7 +242,8 @@ var courseData = {
         terms: ["Spring", ],
         prereqs: ["PHYS140", "MATH260", "MATH251", ],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     MSE250: {
         type: "course",
@@ -228,7 +252,8 @@ var courseData = {
         terms: ["Fall", ],
         prereqs: ["PHYS141", "MATH260", ],
         concurrentOk: "MATH260",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     MSE251: {
         type: "course",
@@ -237,7 +262,8 @@ var courseData = {
         terms: ["Spring", ],
         prereqs: ["MSE250", ],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     MSE280: {
         type: "course",
@@ -246,7 +272,8 @@ var courseData = {
         terms: ["Spring", ],
         prereqs: ["MSE250", ],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     MSE293: {
         type: "coop option",
@@ -255,7 +282,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "30 units",
+        options: ["COOP", ]
     },
     MSE294: {
         type: "coop option",
@@ -264,7 +292,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "30 units",
+        options: ["COOP", ]
     },
     MSE300: {
         type: "course",
@@ -273,7 +302,8 @@ var courseData = {
         terms: ["Summer", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: "75 units"
+        sPrereq: "75 units",
+        options: []
     },
     MSE310: {
         type: "course",
@@ -282,7 +312,8 @@ var courseData = {
         terms: ["Fall", ],
         prereqs: ["MSE280", ],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     MSE311: {
         type: "course",
@@ -291,7 +322,8 @@ var courseData = {
         terms: ["Summer", ],
         prereqs: ["MSE251", "MSE222", ],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     MSE312: {
         type: "course",
@@ -300,7 +332,8 @@ var courseData = {
         terms: ["Summer", ],
         prereqs: ["MSE320", "MSE381", "MSE110", ],
         concurrentOk: "MSE381",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     MSE320: {
         type: "course",
@@ -309,7 +342,8 @@ var courseData = {
         terms: ["Fall", ],
         prereqs: ["MSE220", "MSE100", "MSE221", ],
         concurrentOk: "MSE100",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     MSE321: {
         type: "course",
@@ -318,7 +352,8 @@ var courseData = {
         terms: ["Fall", ],
         prereqs: ["MSE223", ],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     MSE352: {
         type: "course",
@@ -327,7 +362,8 @@ var courseData = {
         terms: ["Fall", ],
         prereqs: ["CMPT130", "MSE251", ],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     MSE353: {
         type: "course",
@@ -336,7 +372,8 @@ var courseData = {
         terms: ["Summer", ],
         prereqs: ["MSE251", ],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     MSE380: {
         type: "course",
@@ -345,7 +382,8 @@ var courseData = {
         terms: ["Fall", ],
         prereqs: ["MSE280", "MSE221", "MSE222", ],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     MSE381: {
         type: "course",
@@ -354,7 +392,8 @@ var courseData = {
         terms: ["Summer", ],
         prereqs: ["MSE280", ],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     MSE393: {
         type: "coop option",
@@ -363,7 +402,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "MSE293 or MSE294",
+        options: ["COOP", ]
     },
     MSE394: {
         type: "coop option",
@@ -372,7 +412,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "MSE293 or MSE294",
+        options: ["COOP", ]
     },
     MSE402: {
         type: "course",
@@ -381,7 +422,8 @@ var courseData = {
         terms: ["Spring", ],
         prereqs: ["MSE102", ],
         concurrentOk: "",
-        sPrereq: "100 units"
+        sPrereq: "100 units",
+        options: []
     },
     MSE405W: {
         type: "course",
@@ -390,7 +432,8 @@ var courseData = {
         terms: ["Summer", ],
         prereqs: ["MSE300", ],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     MSE410: {
         type: "course",
@@ -399,7 +442,8 @@ var courseData = {
         terms: ["Spring", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: "24 upper level MSE units and two co-op terms"
+        sPrereq: "24 upper level MSE units and two co-op terms",
+        options: []
     },
     MSE411: {
         type: "course",
@@ -408,7 +452,8 @@ var courseData = {
         terms: ["Summer", ],
         prereqs: ["MSE410", ],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     MSE420: {
         type: "technical elective option",
@@ -417,7 +462,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: ["MSE220", "MSE222", ],
         concurrentOk: "",
-        sPrereq: "80 credits"
+        sPrereq: "80 credits",
+        options: ["MSE4XX", ]
     },
     MSE421: {
         type: "technical elective option",
@@ -426,7 +472,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: ["MSE380", ],
         concurrentOk: "",
-        sPrereq: "80 credits"
+        sPrereq: "80 credits",
+        options: ["MSE4XX", ]
     },
     MSE422: {
         type: "technical elective option",
@@ -435,7 +482,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: ["MSE321", ],
         concurrentOk: "",
-        sPrereq: "80 credits"
+        sPrereq: "80 credits",
+        options: ["MSE4XX", ]
     },
     MSE423: {
         type: "technical elective option",
@@ -444,7 +492,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: ["MSE321", ],
         concurrentOk: "",
-        sPrereq: "80 credits"
+        sPrereq: "80 credits",
+        options: ["MSE4XX", ]
     },
     MSE424: {
         type: "technical elective option",
@@ -453,7 +502,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: ["MSE321", ],
         concurrentOk: "",
-        sPrereq: "80 credits"
+        sPrereq: "80 credits",
+        options: ["MSE4XX", ]
     },
     MSE425: {
         type: "technical elective option",
@@ -462,7 +512,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: ["CHEM120", "PHYS141", ],
         concurrentOk: "",
-        sPrereq: "80 credits"
+        sPrereq: "80 credits",
+        options: ["MSE4XX", ]
     },
     MSE426: {
         type: "technical elective option",
@@ -471,7 +522,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: ["MATH251", "MSE320", ],
         concurrentOk: "",
-        sPrereq: "80 credits"
+        sPrereq: "80 credits",
+        options: ["MSE4XX", ]
     },
     MSE427: {
         type: "technical elective option",
@@ -480,7 +532,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: ["MSE280", "MSE380", "MSE321", ],
         concurrentOk: "",
-        sPrereq: "80 credits"
+        sPrereq: "80 credits",
+        options: ["MSE4XX", ]
     },
     MSE428: {
         type: "technical elective option",
@@ -489,7 +542,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: ["MSE100", "MSE222", ],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: ["MSE4XX", ]
     },
     MSE429: {
         type: "technical elective option",
@@ -498,7 +552,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: ["MSE222", ],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: ["MSE4XX", ]
     },
     MSE450: {
         type: "technical elective option",
@@ -507,7 +562,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: ["MSE352", "MSE381", ],
         concurrentOk: "",
-        sPrereq: "90 credits"
+        sPrereq: "90 credits",
+        options: ["MSE4XX", ]
     },
     MSE451: {
         type: "technical elective option",
@@ -516,7 +572,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: ["MSE251", ],
         concurrentOk: "",
-        sPrereq: "80 credits"
+        sPrereq: "80 credits",
+        options: ["MSE4XX", ]
     },
     MSE452: {
         type: "technical elective option",
@@ -525,7 +582,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: ["MSE353", ],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: ["MSE4XX", ]
     },
     MSE480: {
         type: "technical elective option",
@@ -534,7 +592,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: ["MSE310", ],
         concurrentOk: "",
-        sPrereq: "80 credits"
+        sPrereq: "80 credits",
+        options: ["MSE4XX", ]
     },
     MSE481: {
         type: "technical elective option",
@@ -543,7 +602,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: ["MSE352", "MSE381", ],
         concurrentOk: "",
-        sPrereq: "80 credits"
+        sPrereq: "80 credits",
+        options: ["MSE4XX", ]
     },
     MSE483: {
         type: "technical elective option",
@@ -552,7 +612,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: ["MSE381", ],
         concurrentOk: "",
-        sPrereq: "80 credits"
+        sPrereq: "80 credits",
+        options: ["MSE4XX", ]
     },
     MSE490: {
         type: "technical elective option",
@@ -561,7 +622,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "???",
+        options: ["MSE4XX", ]
     },
     MSE491: {
         type: "technical elective option",
@@ -570,7 +632,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "???",
+        options: ["MSE4XX", ]
     },
     MSE492: {
         type: "technical elective option",
@@ -579,7 +642,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "???",
+        options: ["MSE4XX", ]
     },
     MSE493: {
         type: "coop option",
@@ -588,7 +652,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "MSE393 or MSE394",
+        options: ["COOP", ]
     },
     MSE494: {
         type: "coop option",
@@ -597,7 +662,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "MSE393 or MSE394",
+        options: ["COOP", ]
     },
     MSE4XX: {
         type: "technical elective",
@@ -606,7 +672,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: ["MSE420", "MSE421", "MSE422", "MSE423", "MSE424", "MSE425", "MSE426", "MSE427", "MSE428", "MSE429", "MSE450", "MSE451", "MSE452", "MSE480", "MSE481", "MSE483", "MSE490", "MSE491", "MSE492", ]
     },
     MSE4XX2: {
         type: "technical elective",
@@ -615,7 +682,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: ["MSE420", "MSE421", "MSE422", "MSE423", "MSE424", "MSE425", "MSE426", "MSE427", "MSE428", "MSE429", "MSE450", "MSE451", "MSE452", "MSE480", "MSE481", "MSE483", "MSE490", "MSE491", "MSE492", ]
     },
     MSE4XX3: {
         type: "technical elective",
@@ -624,7 +692,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: ["MSE420", "MSE421", "MSE422", "MSE423", "MSE424", "MSE425", "MSE426", "MSE427", "MSE428", "MSE429", "MSE450", "MSE451", "MSE452", "MSE480", "MSE481", "MSE483", "MSE490", "MSE491", "MSE492", ]
     },
     MSE4XX4: {
         type: "technical elective",
@@ -633,7 +702,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: ["MSE420", "MSE421", "MSE422", "MSE423", "MSE424", "MSE425", "MSE426", "MSE427", "MSE428", "MSE429", "MSE450", "MSE451", "MSE452", "MSE480", "MSE481", "MSE483", "MSE490", "MSE491", "MSE492", ]
     },
     MSE4XX5: {
         type: "technical elective",
@@ -642,7 +712,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: ["MSE420", "MSE421", "MSE422", "MSE423", "MSE424", "MSE425", "MSE426", "MSE427", "MSE428", "MSE429", "MSE450", "MSE451", "MSE452", "MSE480", "MSE481", "MSE483", "MSE490", "MSE491", "MSE492", ]
     },
     MSE4XX6: {
         type: "technical elective",
@@ -651,7 +722,8 @@ var courseData = {
         terms: ["Fall", "Spring", "Summer", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: ["MSE420", "MSE421", "MSE422", "MSE423", "MSE424", "MSE425", "MSE426", "MSE427", "MSE428", "MSE429", "MSE450", "MSE451", "MSE452", "MSE480", "MSE481", "MSE483", "MSE490", "MSE491", "MSE492", ]
     },
     PHYS140: {
         type: "course",
@@ -660,7 +732,8 @@ var courseData = {
         terms: ["Fall", ],
         prereqs: [],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
     PHYS141: {
         type: "course",
@@ -669,6 +742,7 @@ var courseData = {
         terms: ["Spring", ],
         prereqs: ["PHYS140", ],
         concurrentOk: "",
-        sPrereq: ""
+        sPrereq: "",
+        options: []
     },
 };

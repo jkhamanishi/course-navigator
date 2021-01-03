@@ -5,14 +5,12 @@ function getContent(url, content, outputId){
     $.get(url).then(function (html) {
         // Success response
         var $mainbar = $(html).find(content);
-        $(outputId).text($mainbar.html());
+        $(outputId).html($mainbar.html());
         $(outputId).append(" (<a href='"+url+"' target='_blank'>source</a>)");
     }, function () {
         // Error response
         $(outputId).text('Access denied');
     });
-    console.log("done?")
-    $(outputId).text("uh hwat")
 }
 
 
