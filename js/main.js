@@ -29,7 +29,19 @@ $(document).ready(function(){
     
     assignDialogFunctions();
     
-    moveDetails("right");
+    
+    
+    
+    // var url = "https://www.sfu.ca/students/calendar/2021/spring/courses/mse/251.html"
+    // var content = '.main > p'
+    //getContent(url, content, "calendarDescription");
+    
+    //docEle("calendarDescription").innerHTML = getCourseDescription("MSE251");
+    
+    //log(latestCalendar);
+    
+    
+    
     
 });
 
@@ -120,7 +132,6 @@ function moveDetails(position="right"){
     //log(docEle("sideDetails").firstElementChild.checked)
 }
 
-
 function showDetails(courseId){
     var id
     if (arguments.length == 0){
@@ -139,23 +150,20 @@ function showDetails(courseId){
     }
     
     // Course title
+    docEle("code").innerHTML = "";
+    docEle("name").innerHTML = "";
+    docEle("units").innerHTML = "";
     switch (courseData[id].type) {
         case "coop":{
             docEle("code").innerHTML = "Co-Op Term";
-            docEle("name").innerHTML = ""
-            docEle("units").innerHTML = "";
             break;
         }
         case "technical elective":{
             docEle("code").innerHTML = "Technical Elective";
-            docEle("name").innerHTML = ""
-            docEle("units").innerHTML = "";
             break;
         }
         case "complementary elective":{
             docEle("code").innerHTML = "Complementary Elective";
-            docEle("name").innerHTML = ""
-            docEle("units").innerHTML = "";
             break;
         }
         default:{
@@ -276,19 +284,140 @@ function showDetails(courseId){
     }
     docEle("terms").innerHTML += ". ";
     
+    // Calendar Description
+    docEle("calendarDescription").innerHTML = "";
+    var base_url = " https://www.sfu.ca/mechatronics/current-students/undergraduate-students/undergraduate-program-requirements/"
+    switch (courseData[id].type){
+        case "coop":{
+            docEle("descriptionTitle").innerHTML = "Co-op Requirements"
+            docEle("source").href = base_url+"coop-requirements.html";
+            break;
+        }
+        case "technical elective":{
+            docEle("descriptionTitle").innerHTML = "Technical Studies Electives"
+            docEle("source").href = base_url+"technical-studies-electives.html"
+            break;
+        }
+        case "complementary elective":{
+            docEle("descriptionTitle").innerHTML = "Pre-approved Complementary Study Electives"
+            docEle("source").href = base_url+"pre-approved-compementary-study-electives.html"
+            break;
+        }
+        default:{
+            docEle("descriptionTitle").innerHTML = "Calendar Description"
+            docEle("calendarDescription").innerHTML = getCourseDescription(id);
+            docEle("source").href = getCourseURL(id);
+            break;
+        }
+    }
+    
 }
 
+// for option switching
 function setAsCourse(oldCourse, newCourse) {
-    text = ""
-    parts = newCourse.split(/(\d+)/);
-    for (i in parts){
-        if (i == 0){text = parts[i]+" "}
-        else{text += parts[i]}
-    }
-    docEle(oldCourse).innerHTML = text;
+    docEle(oldCourse).innerHTML = splitCourseCode(newCourse, " ");
     lastclicked = "";
     reloadGrid();
 }
+
+
+function splitCourseCode(courseId, seperator){
+    text = ""
+    parts = courseId.split(/(\d+)/);
+    for (i in parts){
+        if (i == 0){text = parts[i]+seperator}
+        else{text += parts[i]}
+    }
+    return text;
+}
+
+
+
+
+// --- Import External Content ---
+// -------------------------------
+
+function getLatestCalendar(i = 0){
+    var today = new Date();
+    var d = String(today.getDate());
+    var m = String(today.getMonth() + 1); 
+    var yyyy = today.getFullYear();
+
+    // today = m + '/' + d + '/' + yyyy;
+    // log(today);
+    
+    var base_url = "https://www.sfu.ca/students/calendar/";
+    var end_url = "/courses.html";
+    
+    var currentTerm;
+    if (m <= 4) {
+        currentTerm = 1; // Spring
+    } else if (5 <= m && m <= 8) {
+        currentTerm = 2; // Summer
+    } else if (9 <= m) {
+        currentTerm = 0; // Fall
+    }
+    latestTerm = currentTerm + 1 - i;
+    if (latestTerm >= 3) {latestTerm -= 3;};
+    
+    var url = base_url + yyyy + '/' + term2string(latestTerm).toLowerCase() + end_url;
+    var result;
+    $.ajax({
+        url : url,
+        type : "get",
+        async: false,
+        success: function(html){
+            result = "success!";
+        },
+        error: function() {
+            result = 'failed';
+        }
+    });
+    if (result == "failed"){
+        return getLatestCalendar((i+1));
+    } else {
+        log("Found latest Academic Calendar: "+url);
+        return url;
+    }
+}
+var latestCalendar = getLatestCalendar();
+
+function getCourseURL(courseId){
+    var end_url = "/"+splitCourseCode(courseId, "/").toLowerCase()+".html"
+    var url = latestCalendar.replace(".html", end_url);
+    return url;
+}
+
+function getCourseDescription(courseId){
+    var url = getCourseURL(courseId);
+    var content = '.main > p'
+    var text = ""
+    $.ajax({
+        url : url,
+        type : "get",
+        async: false,
+        success: function(html){
+            result = "success!";
+            var $mainbar = $(html).find(content);
+            //text = ($mainbar.html());
+            text = ($mainbar.html()).replaceAll('href="', 'target="_blank" href="https://www.sfu.ca');
+        },
+        error: function() {
+            result = 'failed';
+        }
+    });
+    return text;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

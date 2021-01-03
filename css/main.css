@@ -17,13 +17,14 @@ button, label, input, select {cursor: pointer;}
   padding: 0;
 }
 
-a {color:blue;text-decoration:underline;cursor:pointer;}
+a {color:#0000FF;text-decoration:underline;cursor:pointer;}
+a:visited {                 /* Visited link*/
+    //color: #00FF00;
+    color: #0000FF} 
+a:hover {color: #FF00FF;}   /* Mouse over link */
+a:active {color: #0000FF;}  /* Selected link   */
 
 
-/* body { */
-  /* margin-left: auto; */
-  /* margin-right: auto; */
-/* } */
 
 /* --- Main Content --- */
 #header { grid-area: header; }
