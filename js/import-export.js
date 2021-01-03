@@ -45,7 +45,7 @@ function exportCurriculum (copyData = true){
     //log(text);
     exportOutput.textContent = text;
     if (copyData) {
-        copy('exportOutput', 'copyEx    portButton'); //automatically copy to clipboard
+        copy('exportOutput', 'copyExportButton'); //automatically copy to clipboard
     }
     return text;
 }

@@ -16,11 +16,15 @@ function notChildren(e, parentId) {if (e.target.id == parentId) {return true;}}
 // --- Automated Section ---
 // -------------------------
 
+var userStorage = window.localStorage;
 
 $(document).ready(function(){
     //alert('page loaded');
     
-    setDarkTheme()
+    if (userStorage.darkTheme == "true") {
+        document.getElementById("darktheme").checked = true;
+        setDarkTheme()
+    }
     
     moveDetails.currentPosition="right";
     
@@ -29,16 +33,6 @@ $(document).ready(function(){
     
     assignDialogFunctions();
     
-    
-    
-    
-    // var url = "https://www.sfu.ca/students/calendar/2021/spring/courses/mse/251.html"
-    // var content = '.main > p'
-    //getContent(url, content, "calendarDescription");
-    
-    //docEle("calendarDescription").innerHTML = getCourseDescription("MSE251");
-    
-    //log(latestCalendar);
     
     
     
@@ -56,16 +50,21 @@ $(window).resize(function(){
 
 
 
+
+
 // --- UI Viewing Functions ---
 // ----------------------------
 
 
 function setDarkTheme(){
-    var input = document.getElementById("darktheme")
+    var input = document.getElementById("darktheme");
+    
     if (input.checked == true) {
         document.body.classList.add('darkTheme');
+        userStorage.darkTheme = true;
     } else {
         document.body.classList.remove('darkTheme');
+        userStorage.darkTheme = false;
     }
 }
 
