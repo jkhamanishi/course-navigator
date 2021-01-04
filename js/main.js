@@ -113,6 +113,7 @@ function setComicSans(force = false){
         document.body.style.fontFamily = "";
         if (saveSettings()){userStorage.comicSans = false;}
     }
+    orientAllArrows();
 }
 
 
@@ -284,13 +285,6 @@ function showDetails(courseId){
         newDIV.setAttribute("onclick", "showDetails('"+option+"')");
         newDIV.title = courseData[option].name;
         docEle("options").getElementsByTagName("DIV")[0].appendChild(newDIV);
-        
-        // function replaceCourseText(){
-            // if (!(lastclicked == "")){
-                // return ""//"; setAsCourse('"+lastclicked+"', '"+option+"')"
-            // }
-            // return ""
-        // }
     }    
     // Replace current selected course with option
     docEle("selectCourse").innerHTML = "";
@@ -426,6 +420,12 @@ function splitCourseCode(courseId, seperator){
 // -------------------------------
 
 function getLatestCalendar(i = 0){
+    
+    if (i > 3){
+        log("Could not find an Academic Calendar within the last year.")
+        return;
+    }
+    
     var today = new Date();
     var d = String(today.getDate());
     var m = String(today.getMonth() + 1); 
