@@ -1,15 +1,8 @@
 // --- Export Functions ---
 // ------------------------
 
-function exportCurriculum (copyData = true){
-    if (copyData) {
-        showDialogBox("exportDialogBox");
-    }
-    var exportOutput = document.getElementById("exportOutput");
-    
-    var grid = document.getElementById("grid");
-    var gridContents = grid.children;
-    
+function getGridSize(){
+    var gridContents = document.getElementById("grid").children;
     
     // Find last row
     var rows = parseInt(gridContents[gridContents.length-1].style.gridRowStart);
@@ -26,7 +19,21 @@ function exportCurriculum (copyData = true){
         }
     }
     
-    //log([rows, columns]);
+    return [rows, columns];
+}
+
+function exportCurriculum (copyData = true){
+    if (copyData) {
+        showDialogBox("exportDialogBox");
+    }
+    var exportOutput = document.getElementById("exportOutput");
+    
+    var grid = document.getElementById("grid");
+    var gridContents = grid.children;
+    
+    var rows, columns;
+    [rows, columns] = getGridSize();
+    
     
     var text = "";
     var k = 0;
@@ -45,6 +52,7 @@ function exportCurriculum (copyData = true){
     //log(text);
     exportOutput.textContent = text;
     if (copyData) {
+        copy('exportOutput', 'copyExportButton')
         copy('exportOutput', 'copyExportButton'); //automatically copy to clipboard
     }
     return text;
@@ -191,8 +199,10 @@ function assignDialogFunctions() {
             loadGrid(csv2jsData(text, 4));
             hideDialogBox("importDialogBox");
             docEle("importedCurriculum").value = "";
+            docEle("errorMsg").innerHTML = ""
         } catch {
-            docEle("errorMsg").innerHTML = "invalid input format"
+            var warningSign = '<img class="inlineWarning" src="img/warning.png"/>';
+            docEle("errorMsg").innerHTML = warningSign+"invalid input format"
         }
         docEle("curriculum").value = "custom"
     });

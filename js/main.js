@@ -21,15 +21,12 @@ var userStorage = window.localStorage;
 $(document).ready(function(){
     //alert('page loaded');
     
-    if (userStorage.darkTheme == "true") {
-        document.getElementById("darktheme").checked = true;
-        setDarkTheme()
-    }
+    loadSettings();
     
     moveDetails.currentPosition="right";
     
     console.log(courseData); // var courseData from courseData.js
-    loadGrid(flexA); // var flexA from default-curriculums.js
+    
     
     assignDialogFunctions();
     
@@ -55,18 +52,69 @@ $(window).resize(function(){
 // --- UI Viewing Functions ---
 // ----------------------------
 
+function saveSettings(){
+    return docEle("saveSettings").checked;
+}
 
-function setDarkTheme(){
-    var input = document.getElementById("darktheme");
-    
-    if (input.checked == true) {
-        document.body.classList.add('darkTheme');
-        userStorage.darkTheme = true;
+function saveCurriculum(){
+    userStorage.gridData = exportCurriculum(false);
+}
+
+function loadSettings(){
+    if (userStorage.length > 0){
+        setDarkTheme(userStorage.darkTheme == "true");
+        setComicSans(userStorage.comicSans == "true");
+        docEle("saveSettings").checked = true;
+        log("localStorage found. Your settings have been loaded.");
+        try {
+            loadGrid(csv2jsData(userStorage.gridData,4));
+            docEle("curriculum").value = "custom"
+            log("Curriculum from localStorage has successfully loaded.")
+        } catch {
+            loadGrid(flexA);
+            log("Curriculum from localStorage has failed to load. Default curriculum has been loaded.")
+        }
     } else {
-        document.body.classList.remove('darkTheme');
-        userStorage.darkTheme = false;
+        loadGrid(flexA);
     }
 }
+function changeSettings(){
+    if (saveSettings()) {
+        setDarkTheme();
+        setComicSans();
+        saveCurriculum();
+        log("localStorage enabled. Your settings and curriculum will now be automatically saved.");
+    } else {
+        window.localStorage.clear();
+        log("localStorage cleared. Your settings and curriculum will no longer be saved.");
+    }
+}
+
+function setDarkTheme(force = false){
+    var input = document.getElementById("darktheme");
+    
+    if ((input.checked == true)||force)  {
+        document.body.classList.add('darkTheme');
+        input.checked = true;
+        if (saveSettings()){userStorage.darkTheme = true;}
+    } else {
+        document.body.classList.remove('darkTheme');
+        if (saveSettings()){userStorage.darkTheme = false;}
+    }
+}
+function setComicSans(force = false){
+    var input = document.getElementById("comicSans");
+    
+    if ((input.checked == true)||force) {
+        document.body.style.fontFamily = "'Comic Sans MS', 'Comic Sans', 'Brush Script MT', sans-serif";
+        input.checked = true;
+        if (saveSettings()){userStorage.comicSans = true;}
+    } else {
+        document.body.style.fontFamily = "";
+        if (saveSettings()){userStorage.comicSans = false;}
+    }
+}
+
 
 
 function scrollToViewGrid() {
@@ -79,6 +127,7 @@ function changeCurriculum() {
     if (value == "custom") {
         return;
     } else if (value == "import"){
+        docEle("curriculum").value = "custom";
         showDialogBox('importDialogBox');
         docEle("importedCurriculum").focus()
     } else if (docEle("constantSquishing").checked) {
@@ -89,6 +138,10 @@ function changeCurriculum() {
         docEle("exportButton").style.visibility = "hidden";
     }
 }
+
+
+
+
 
 
 // --- Details Section ---
@@ -128,7 +181,6 @@ function moveDetails(position="right"){
             
         }
     }
-    //log(docEle("sideDetails").firstElementChild.checked)
 }
 
 function showDetails(courseId){
@@ -148,6 +200,16 @@ function showDetails(courseId){
         id = courseId;
     }
     
+    
+    function isSetElectve(){
+        return (docEle(id).innerText !== "Elective");
+    }
+    var electiveId;
+    if ((courseData[id].type == "complementary elective")&&isSetElectve()){
+        electiveId = docEle(id).innerText.replace(/[ -]/g, "");
+    }
+    
+    
     // Course title
     docEle("code").innerHTML = "";
     docEle("name").innerHTML = "";
@@ -162,7 +224,11 @@ function showDetails(courseId){
             break;
         }
         case "complementary elective":{
-            docEle("code").innerHTML = "Complementary Elective";
+            if (isSetElectve()){
+                docEle("code").innerHTML = getCourseTitle(electiveId);
+            } else {
+                docEle("code").innerHTML += "Complementary Elective";
+            }
             break;
         }
         default:{
@@ -179,7 +245,7 @@ function showDetails(courseId){
     if (!docEle(id)) {
         docEle("warning").innerHTML = "";
     }else if (!isValidated(id)[0]){
-        var warningSign = '<img src="img/warning.png"/>';
+        var warningSign = '<img class="inlineWarning" src="img/warning.png"/>';
         docEle("warning").innerHTML = "";
         for (x of isValidated(id)[1]){
             docEle("warning").innerHTML += "<p>" + warningSign + x + "</p>";
@@ -282,29 +348,51 @@ function showDetails(courseId){
         }
     }
     docEle("terms").innerHTML += ". ";
+    switch (courseData[id].type){
+        case "complementary elective":
+            if (isSetElectve()){
+                docEle("terms").innerHTML = "??? (see <a href="+getCoursysBrowseURL(electiveId)+">Coursys Browse</a>)";
+                break;
+            }
+        case "technical elective":
+        case "technical elective option":
+            docEle("terms").innerHTML = "???";
+    }
+    
     
     // Calendar Description
     docEle("calendarDescription").innerHTML = "";
-    var base_url = " https://www.sfu.ca/mechatronics/current-students/undergraduate-students/undergraduate-program-requirements/"
+    var base_url = "https://www.sfu.ca/mechatronics/current-students/undergraduate-students/undergraduate-program-requirements/"
     switch (courseData[id].type){
         case "coop":{
             docEle("descriptionTitle").innerHTML = "Co-op Requirements"
+            docEle("source").innerHTML = "resource link";
             docEle("source").href = base_url+"coop-requirements.html";
             break;
         }
         case "technical elective":{
             docEle("descriptionTitle").innerHTML = "Technical Studies Electives"
+            docEle("source").innerHTML = "resource link";
             docEle("source").href = base_url+"technical-studies-electives.html"
             break;
         }
         case "complementary elective":{
-            docEle("descriptionTitle").innerHTML = "Pre-approved Complementary Study Electives"
-            docEle("source").href = base_url+"pre-approved-compementary-study-electives.html"
+            if (!isSetElectve()) {
+                docEle("descriptionTitle").innerHTML = "Pre-approved Complementary Study Electives"
+                docEle("source").innerHTML = "resource link";
+                docEle("source").href = base_url+"pre-approved-compementary-study-electives.html"
+            } else {
+                docEle("descriptionTitle").innerHTML = "Calendar Description"
+                docEle("calendarDescription").innerHTML = getCourseDescription(electiveId);
+                docEle("source").innerHTML = "source";
+                docEle("source").href = getCourseURL(electiveId);
+            }
             break;
         }
         default:{
             docEle("descriptionTitle").innerHTML = "Calendar Description"
             docEle("calendarDescription").innerHTML = getCourseDescription(id);
+            docEle("source").innerHTML = "source";
             docEle("source").href = getCourseURL(id);
             break;
         }
@@ -320,6 +408,8 @@ function setAsCourse(oldCourse, newCourse) {
 }
 
 
+
+
 function splitCourseCode(courseId, seperator){
     text = ""
     parts = courseId.split(/(\d+)/);
@@ -329,7 +419,6 @@ function splitCourseCode(courseId, seperator){
     }
     return text;
 }
-
 
 
 
@@ -391,6 +480,7 @@ function getCourseDescription(courseId){
     var url = getCourseURL(courseId);
     var content = '.main > p'
     var text = ""
+    var result;
     $.ajax({
         url : url,
         type : "get",
@@ -403,16 +493,45 @@ function getCourseDescription(courseId){
         },
         error: function() {
             result = 'failed';
+            text = "Could not load calendar description."
         }
     });
     return text;
 }
 
+function getCourseTitle(courseId){
+    var url = getCourseURL(courseId);
+    var content = '.main > h1';
+    var text = "";
+    var result;
+    $.ajax({
+        url : url,
+        type : "get",
+        async: false,
+        success: function(html){
+            var $mainbar = $(html).find(content);
+            text = ($mainbar.text());
+            result = true;
+        },
+        error: function(){
+            text = "Error: Course not found.";
+            result = false;
+        }
+    });
+    if (result){
+        var parts = text.replace(/\t/g, "").replace(/\n\n/g, "\n").split("\n");
+        return parts[2]+parts[3]+": "+parts[1]+" "+parts[4];
+    } else {
+        return text;
+    }
+}
 
 
-
-
-
+function getCoursysBrowseURL(courseId){
+    var subject = courseId.split(/(\d+)/)[0];
+    var number = courseId.split(/(\d+)/).slice(1).join("");
+    return "https://coursys.sfu.ca/browse/#!number="+number+"&subject="+subject;
+}
 
 
 

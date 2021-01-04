@@ -65,6 +65,26 @@ var courseData = {
         sPrereq: "",
         options: ["MSE293", "MSE294", "MSE393", "MSE394", "MSE493", "MSE494", ]
     },
+    COOP5: {
+        type: "coop",
+        name: "",
+        units: 0,
+        terms: ["Fall", "Spring", "Summer", ],
+        prereqs: [],
+        concurrentOk: "",
+        sPrereq: "",
+        options: ["MSE293", "MSE294", "MSE393", "MSE394", "MSE493", "MSE494", ]
+    },
+    COOP6: {
+        type: "coop",
+        name: "",
+        units: 0,
+        terms: ["Fall", "Spring", "Summer", ],
+        prereqs: [],
+        concurrentOk: "",
+        sPrereq: "",
+        options: ["MSE293", "MSE294", "MSE393", "MSE394", "MSE493", "MSE494", ]
+    },
     Elective: {
         type: "complementary elective",
         name: "",
@@ -86,6 +106,36 @@ var courseData = {
         options: []
     },
     Elective3: {
+        type: "complementary elective",
+        name: "",
+        units: 3,
+        terms: ["Fall", "Spring", "Summer", ],
+        prereqs: [],
+        concurrentOk: "",
+        sPrereq: "???",
+        options: []
+    },
+    Elective4: {
+        type: "complementary elective",
+        name: "",
+        units: 3,
+        terms: ["Fall", "Spring", "Summer", ],
+        prereqs: [],
+        concurrentOk: "",
+        sPrereq: "???",
+        options: []
+    },
+    Elective5: {
+        type: "complementary elective",
+        name: "",
+        units: 3,
+        terms: ["Fall", "Spring", "Summer", ],
+        prereqs: [],
+        concurrentOk: "",
+        sPrereq: "???",
+        options: []
+    },
+    Elective6: {
         type: "complementary elective",
         name: "",
         units: 3,
@@ -716,6 +766,26 @@ var courseData = {
         options: ["MSE420", "MSE421", "MSE422", "MSE423", "MSE424", "MSE425", "MSE426", "MSE427", "MSE428", "MSE429", "MSE450", "MSE451", "MSE452", "MSE480", "MSE481", "MSE483", "MSE490", "MSE491", "MSE492", ]
     },
     MSE4XX6: {
+        type: "technical elective",
+        name: "",
+        units: 0,
+        terms: ["Fall", "Spring", "Summer", ],
+        prereqs: [],
+        concurrentOk: "",
+        sPrereq: "",
+        options: ["MSE420", "MSE421", "MSE422", "MSE423", "MSE424", "MSE425", "MSE426", "MSE427", "MSE428", "MSE429", "MSE450", "MSE451", "MSE452", "MSE480", "MSE481", "MSE483", "MSE490", "MSE491", "MSE492", ]
+    },
+    MSE4XX7: {
+        type: "technical elective",
+        name: "",
+        units: 0,
+        terms: ["Fall", "Spring", "Summer", ],
+        prereqs: [],
+        concurrentOk: "",
+        sPrereq: "",
+        options: ["MSE420", "MSE421", "MSE422", "MSE423", "MSE424", "MSE425", "MSE426", "MSE427", "MSE428", "MSE429", "MSE450", "MSE451", "MSE452", "MSE480", "MSE481", "MSE483", "MSE490", "MSE491", "MSE492", ]
+    },
+    MSE4XX8: {
         type: "technical elective",
         name: "",
         units: 0,

@@ -5,9 +5,14 @@ COOP,coop,,0,Fall,Spring,Summer,,,,,,,MSE293,MSE294,MSE393,MSE394,MSE493,MSE494,
 COOP2,coop,,0,Fall,Spring,Summer,,,,,,,MSE293,MSE294,MSE393,MSE394,MSE493,MSE494,,,,,,,,,,,,,
 COOP3,coop,,0,Fall,Spring,Summer,,,,,,,MSE293,MSE294,MSE393,MSE394,MSE493,MSE494,,,,,,,,,,,,,
 COOP4,coop,,0,Fall,Spring,Summer,,,,,,,MSE293,MSE294,MSE393,MSE394,MSE493,MSE494,,,,,,,,,,,,,
+COOP5,coop,,0,Fall,Spring,Summer,,,,,,,MSE293,MSE294,MSE393,MSE394,MSE493,MSE494,,,,,,,,,,,,,
+COOP6,coop,,0,Fall,Spring,Summer,,,,,,,MSE293,MSE294,MSE393,MSE394,MSE493,MSE494,,,,,,,,,,,,,
 Elective,complementary elective,,3,Fall,Spring,Summer,,,,,,???,,,,,,,,,,,,,,,,,,,
 Elective2,complementary elective,,3,Fall,Spring,Summer,,,,,,???,,,,,,,,,,,,,,,,,,,
 Elective3,complementary elective,,3,Fall,Spring,Summer,,,,,,???,,,,,,,,,,,,,,,,,,,
+Elective4,complementary elective,,3,Fall,Spring,Summer,,,,,,???,,,,,,,,,,,,,,,,,,,
+Elective5,complementary elective,,3,Fall,Spring,Summer,,,,,,???,,,,,,,,,,,,,,,,,,,
+Elective6,complementary elective,,3,Fall,Spring,Summer,,,,,,???,,,,,,,,,,,,,,,,,,,
 MATH151,course,Calculus I,3,Fall,,,,,,,,,,,,,,,,,,,,,,,,,,,
 MATH152,course,Calculus II,3,Fall,Spring,Summer,MATH151,,,,,,,,,,,,,,,,,,,,,,,,
 MATH232,course,Applied Linear Algebra,3,Fall,Spring,Summer,MATH151,,,,,,,,,,,,,,,,,,,,,,,,
@@ -71,5 +76,7 @@ MSE4XX3,technical elective,,0,Fall,Spring,Summer,,,,,,,MSE420,MSE421,MSE422,MSE4
 MSE4XX4,technical elective,,0,Fall,Spring,Summer,,,,,,,MSE420,MSE421,MSE422,MSE423,MSE424,MSE425,MSE426,MSE427,MSE428,MSE429,MSE450,MSE451,MSE452,MSE480,MSE481,MSE483,MSE490,MSE491,MSE492
 MSE4XX5,technical elective,,0,Fall,Spring,Summer,,,,,,,MSE420,MSE421,MSE422,MSE423,MSE424,MSE425,MSE426,MSE427,MSE428,MSE429,MSE450,MSE451,MSE452,MSE480,MSE481,MSE483,MSE490,MSE491,MSE492
 MSE4XX6,technical elective,,0,Fall,Spring,Summer,,,,,,,MSE420,MSE421,MSE422,MSE423,MSE424,MSE425,MSE426,MSE427,MSE428,MSE429,MSE450,MSE451,MSE452,MSE480,MSE481,MSE483,MSE490,MSE491,MSE492
+MSE4XX7,technical elective,,0,Fall,Spring,Summer,,,,,,,MSE420,MSE421,MSE422,MSE423,MSE424,MSE425,MSE426,MSE427,MSE428,MSE429,MSE450,MSE451,MSE452,MSE480,MSE481,MSE483,MSE490,MSE491,MSE492
+MSE4XX8,technical elective,,0,Fall,Spring,Summer,,,,,,,MSE420,MSE421,MSE422,MSE423,MSE424,MSE425,MSE426,MSE427,MSE428,MSE429,MSE450,MSE451,MSE452,MSE480,MSE481,MSE483,MSE490,MSE491,MSE492
 PHYS140,course,Studio Physics - Mechanics and Modern Physics,4,Fall,,,,,,,,,,,,,,,,,,,,,,,,,,,
 PHYS141,course,Studio Physics - Optics Electricity and Magnetism,4,Spring,,,PHYS140,,,,,,,,,,,,,,,,,,,,,,,,

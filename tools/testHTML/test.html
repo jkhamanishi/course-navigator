@@ -1,61 +1,22 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-
-function getContent(url, content, outputId){
-    $.get(url).then(function (html) {
-        // Success response
-        var $mainbar = $(html).find(content);
-        $(outputId).text($mainbar.html());
-    }, function () {
-        // Error response
-        $(outputId).text('Access denied');
-    });
-    console.log("done?")
-    $(outputId).text("uh hwat")
+<style>
+div{
+    background-color: lightblue;
+}
+div > div{
+    display: inline-block;
+}
+#div2 {
+    float: right;
 }
 
 
+</style>
 
-var url1 = "http://www.sfu.ca/outlines.html?2021/spring/mse/490/d100"
-var content1 = '.co-course-topic';
-var outputId1 = "#courseTopic";
-getContent(url1, content1, outputId1);
-
-
-
-var url2 = "https://www.sfu.ca/students/calendar/2021/spring/courses/mse/490.html"
-var content2 = '.main > p';
-var outputId2 = "#courseDetails";
-getContent(url2, content2, outputId2);
-
-</script>
-
-
-<body>
-<h1>MSE 490 Spring 2021</h1>
-
-<p><b>Course Topic:</b> <span id="courseTopic"></span></p>
+<div>
+    <div id="div1"><a>text1</a></div>
+    <div id="div2">text2</div>
+    
 
 
 
-<p>
-<b>Course Details:</b>
-<br>
-<span id="courseDetails"></span>
-
-
-
-
-
-
-
-
-
-
-
-</p>
-</body>
-
-
-
-
+</div>
