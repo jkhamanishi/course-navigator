@@ -62,10 +62,10 @@ function loadGrid(gridData){
             if (gridData[i][j] != "") {
                 // Add courses
                 var courseCode = availableID(gridData[i][j].replace(/[ -]/g, "")); // inside the [] is a list of characters to be replaced with ""
+                try{courseData[courseCode].type}catch{courseCode = availableID("Elective")}
                 var dragDIV = document.createElement("DIV");
+                dragDIV.id = courseCode;
                 dragDIV.innerHTML = gridData[i][j];
-                //dragDIV.setAttribute("style", "width: 100px; height: 100px;");
-                //dragDIV.height = "100px";
                 dragDIV.classList.add('drag');
                 dragDIV.setAttribute("draggable", "true");
                 dragDIV.setAttribute("ondragstart", "dragStart(event)");
@@ -74,7 +74,6 @@ function loadGrid(gridData){
                 dragDIV.setAttribute("onclick", "spotlightCourse(event)");
                 dragDIV.setAttribute("onmouseenter", "showDetails(event.target.id)");
                 dragDIV.setAttribute("onmouseleave", "showDetails()");
-                dragDIV.id = courseCode
                 dragDIV.style.display = "initial";
                 newDIV.appendChild(dragDIV);
                 addWarning(dragDIV);
@@ -131,6 +130,7 @@ function updateGrid() {
     if (docEle("constantSquishing").checked){
         squish();
     }
+    if (saveSettings()){saveCurriculum()};
 }
 
 function reloadGrid(){
@@ -174,7 +174,7 @@ function dragStart(ev) {
     newlocation = ev.target.id;
     ev.dataTransfer.setData("text", ev.target.id);
     var placeholders = document.getElementsByClassName("empty");
-    for (x of placeholders) {x.style.outline = "0.1em dotted grey";}
+    for (x of placeholders) {x.style.border = "0.1em dotted grey";}
 }
 function dragging(ev) {
     draggedCourse = ev.target.id;
@@ -190,12 +190,12 @@ function dragging(ev) {
     }
 }
 function dragEnd(ev) {
-    docEle("curriculum").value = "custom"
+    docEle("curriculum").value = "custom";
     updateGrid();
     var placeholders = document.getElementsByClassName("empty");
     for (x of placeholders) {
         x.style.backgroundColor = ""; 
-        x.style.outline = "";
+        x.style.border = "";
     }
     docEle("exportButton").style.visibility = "visible";
     
@@ -521,6 +521,46 @@ function squish() {
     orientAllArrows(2);
     updateWarnings();
 }
+
+
+
+
+
+
+// --- Add/Remove Columns ---
+// --------------------------
+
+
+function addColumn(){
+    var newCurriculum = exportCurriculum(false).replace(/\n/g, ",\n")+",";
+    loadGrid(csv2jsData(newCurriculum,4));
+}
+
+
+function removeColumn(){
+    var rows, columns;
+    [rows, columns] = getGridSize();
+    
+    for (var i=0; i<rows; i++){ // for every row
+        if (docEle("empty"+(i)+"-"+(columns-1)).firstChild) {
+            alert("Last column contains a course and can not be deleted.")
+            return
+        }
+    }
+    
+    var newCurriculum = exportCurriculum(false).replace(/,\n/g, "\n").slice(0, -1);
+    loadGrid(csv2jsData(newCurriculum,4));
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

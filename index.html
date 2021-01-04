@@ -57,6 +57,9 @@
     <input type="checkbox" id="hideArrows" name="hideArrows" onchange="orientAllArrows(2)">
     <label for="hideArrows">Hide arrows</label><br>
     
+    <span>Columns: </span>
+    <button type="button" style="width: 1em" onclick="removeColumn()">-</button>/<button type="button" style="width: 1em" onclick="addColumn()">+</button><br>
+    
     <button type="button" id="squish" onclick="squish()">Squish courses left</button><br>
     <div><input type="checkbox" id="constantSquishing" name="constantSquishing" onchange="squish()">
     <label for="constantSquishing">Constant squishing</label></div><br>
@@ -188,9 +191,9 @@
     <div>
         <p>If you spot an error or any inconsistencies, please report it to one of the following:</p><br>
         <ul>
-          <li><a>Github</a></li>
-          <li><a>MSESS via email</a></li>
-          <li><a>MSESS via Discord</a></li>
+          <li><a href="https://github.com/jkhamanishi/course-navigator/issues">Github</a></li>
+          <!-- <li><a>MSESS via email</a></li> -->
+          <li><a href="https://discord.gg/zpXtC57">MSESS via Discord</a></li>
         </ul>
     </div>
 </div></div>
