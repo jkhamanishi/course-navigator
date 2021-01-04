@@ -43,13 +43,10 @@ body {
     'main main main';
   grid-template-columns: auto 1fr 1fr;
   grid-gap: 10px;
-  //background-color: rgba(33, 150, 243, 0.5);
-  //padding: 10px 0;
   max-width: 1350px;
 }
 body > div {
   background-color: rgba(255, 255, 255, 0.8);
-  //padding: 10px 0;
 }
 #header{
     padding: 0 20px 0 0;
@@ -73,15 +70,8 @@ body > div {
 #grid {
   display: grid;
   grid-gap: 0px;
-  //background-color: #2196F3;
-  //background-color: coral;
-  //background-color: rgba(255, 127, 80, 0.5);
   padding: 5px 0px;
   margin: 0px 2%;
-  //opacity: 0.5;
-  //min-width: 900px;
-  //max-width: 1400px;
-  //max-height: 80vh;
   grid-auto-flow: dense;
   width: clamp(900px, 2vw, 1400px);
 }
@@ -92,28 +82,17 @@ body > div {
   place-items: center start;
   font-size: clamp(10px, 2vw, 15px);
   font-family: sans-serif;
-  //font-size: clamp(10px, 1vw, 15px);
   max-height: 2em;
 }
 
 .empty, .drag, .dragDummy{
   width: clamp(50px, 5vw, 80px);
-  //width: clamp(100px, 5vw, 150px);
   height: clamp(20px, 2vw, 25px);
-  //min-width: 60px;
-  //width: 5vw;
-  //max-width: 80px;
-  //min-height: 20px;
-  //height: 2vw;
-  //max-height: 25px;
   align-items: center;
   border-radius: clamp(2px, .5vw, 8px);
 }
 .empty {
-  //margin: max(12px, 1vw) 10px;
   margin: clamp(10px, 1vmin, 15px) 10px;
-  //background-color: white;
-  //min-width: 20px;
   display: grid;
   place-items: center;
 }
@@ -121,11 +100,9 @@ body > div {
   background-color: lightblue;
   text-align: center;
   padding: 5px 2px 0px;
-  //font-size: max(8px, 1vw);
   font-size: clamp(8px, 0.8vw, 12px);
   font-family: sans-serif;
   //font: 1vw "Comic Sans MS", "Comic Sans", 'Brush Script MT', sans-serif;
-  //outline: 0.2em solid royalblue;
   border: 0.2em solid royalblue;
   position: relative;
   cursor: pointer;
@@ -156,11 +133,9 @@ body > div {
 //#main{position: relative;}
 #details img, .inlineWarning {
     height: 1em; 
-    vertical-align:text-top; 
-    //display: none;
+    vertical-align:text-top;
 }
 .sideDetails{
-    //outline: 2px solid;
     outline: 0.1em dotted grey;
     position: absolute;
     height: 100%;
@@ -196,7 +171,6 @@ body > div {
 
 .dragDummy{
     display: inline-block;
-    //display: none;
     margin: clamp(10px, 1vmin, 15px) 10px;
 }
 
@@ -214,7 +188,6 @@ body > div {
 
 /* --- Dialog Box --- */
 .dialogBox {
-    //display: grid;
     background-color: rgba(50,50,50,0.6);
     position: fixed;
     height: 100vh;
