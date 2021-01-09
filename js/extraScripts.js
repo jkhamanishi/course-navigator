@@ -5,15 +5,19 @@
 
 const secretCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a']
 
-var i = 0;
+var keyCount = 0;
 window.addEventListener('keyup', (event) => {
+    //console.log(event.key + ", " + keyCount);
     
-    if (secretCode[i] !== event.key) {
-        i = 0;
+    if (secretCode[keyCount] !== event.key) {
+        keyCount = 0;
     } else {
-        i++;
+        keyCount++;
         //log(i);
-        if (i == 10) {alert("Konami Code entered")}
+        if (keyCount == 10) {
+            alert("Konami Code entered");
+            keyCount = 0;
+        }
     }
 });
 
