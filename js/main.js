@@ -450,12 +450,18 @@ function getLatestCalendar(i = 0){
     
     var url = base_url + yyyy + '/' + term2string(latestTerm).toLowerCase() + end_url;
     var result;
+    var content = '.course-finder > h1'
     $.ajax({
         url : url,
         type : "get",
         async: false,
         success: function(html){
-            result = "success!";
+            var $mainbar = $(html).find(content);
+            if (($mainbar.html()) == 'Courses by Subject'){
+                result = "success!";
+            } else {
+                result = 'failed';
+            }
         },
         error: function() {
             result = 'failed';
