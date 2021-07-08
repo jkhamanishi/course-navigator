@@ -285,6 +285,7 @@ function orientAllArrows(length = 1) {
         }
         
     }
+    if (saveSettings()){userStorage.hideArrows = hideArrows;}
 }
 
 function findArrows(attribute, value) {

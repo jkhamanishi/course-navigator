@@ -64,6 +64,7 @@ function loadSettings(){
     if (userStorage.length > 0){
         setDarkTheme(userStorage.darkTheme == "true");
         setComicSans(userStorage.comicSans == "true");
+        docEle("hideArrows").checked = userStorage.hideArrows == "true";
         docEle("saveSettings").checked = true;
         log("localStorage found. Your settings have been loaded.");
         try {
