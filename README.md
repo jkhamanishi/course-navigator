@@ -4,7 +4,7 @@ This web app is designed to replace the outdated [MSE Course Navigator](https://
 
 ## Features
 
-- A set of pre-made curriculum
+- A set of pre-made curriculums
 - Drag and drop the courses to customize your own curriculum
 - Export and import your custom curriculum
 - Option to save your curriculum automatically with cookies.
