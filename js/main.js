@@ -448,6 +448,7 @@ function getLatestCalendar(i = 0){
     }
     latestTerm = currentTerm + 1 - i;
     if (latestTerm >= 3) {latestTerm -= 3;};
+    if (latestTerm == 1 && currentTerm == 0) {yyyy += 1;};
     
     var url = base_url + yyyy + '/' + term2string(latestTerm).toLowerCase() + end_url;
     var result;
