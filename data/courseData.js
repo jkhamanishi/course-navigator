@@ -229,7 +229,7 @@ var courseData = {
         type: "course",
         name: "Mechatronics Design I",
         units: 3,
-        terms: ["Fall", "Spring", "Summer", ],
+        terms: ["Fall", "Summer", ],
         prereqs: [],
         concurrentOk: "",
         sPrereq: "",
