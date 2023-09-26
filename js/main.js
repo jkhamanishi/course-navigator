@@ -154,7 +154,7 @@ function moveDetails(position="right"){
     if (position == "bottom"){
         docEle("details").className = "";
         docEle("details").style.top = "";
-        docEle("details").style.height = "";
+        docEle("details").style.height = "300px";
         docEle("details").style.width = "";
         moveDetails.currentPosition = "bottom";
     } else if (position == "right"){
