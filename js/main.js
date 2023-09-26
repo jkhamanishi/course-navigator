@@ -201,11 +201,11 @@ function showDetails(courseId){
     }
     
     
-    function isSetElectve(){
+    function isSetElective(){
         return (docEle(id).innerText !== "Elective");
     }
     var electiveId;
-    if ((courseData[id].type == "complementary elective")&&isSetElectve()){
+    if ((courseData[id].type == "complementary elective")&&isSetElective()){
         electiveId = docEle(id).innerText.replace(/[ -]/g, "");
     }
     
@@ -224,7 +224,7 @@ function showDetails(courseId){
             break;
         }
         case "complementary elective":{
-            if (isSetElectve()){
+            if (isSetElective()){
                 docEle("code").innerHTML = getCourseTitle(electiveId);
             } else {
                 docEle("code").innerHTML += "Complementary Elective";
@@ -343,7 +343,7 @@ function showDetails(courseId){
     docEle("terms").innerHTML += ". ";
     switch (courseData[id].type){
         case "complementary elective":
-            if (isSetElectve()){
+            if (isSetElective()){
                 docEle("terms").innerHTML = "??? (see <a href="+getCoursysBrowseURL(electiveId)+">Coursys Browse</a>)";
                 break;
             }
@@ -370,7 +370,7 @@ function showDetails(courseId){
             break;
         }
         case "complementary elective":{
-            if (!isSetElectve()) {
+            if (!isSetElective()) {
                 docEle("descriptionTitle").innerHTML = "Pre-approved Complementary Study Electives"
                 docEle("source").innerHTML = "resource link";
                 docEle("source").href = base_url+"pre-approved-compementary-study-electives.html"
