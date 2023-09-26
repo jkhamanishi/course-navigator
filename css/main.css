@@ -156,6 +156,10 @@ body > div {
 /* --- Import/Export --- */
 #exportButton{visibility: hidden;}
 
+#copyExportButton, #saveExportButton {
+    margin: 5px 4px 2px 0px;
+}
+
 #importButton{
     float: right;
     width: 5em;

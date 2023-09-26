@@ -48,25 +48,20 @@ function exportCurriculum (copyData = true){
         }
         if (i !== rows - 1) {text += "\n";}
     }
-    
-    //log(text);
+
     exportOutput.textContent = text;
-    if (copyData) {
-        copy('exportOutput', 'copyExportButton')
-        copy('exportOutput', 'copyExportButton'); //automatically copy to clipboard
-    }
     return text;
 }
 
 
-function copy(containerid, buttonId) {
+function copy(container_id, buttonId) {
   if (document.selection) {
     var range = document.body.createTextRange();
-    range.moveToElementText(document.getElementById(containerid));
+    range.moveToElementText(document.getElementById(container_id));
     range.select().createTextRange();
   } else if (window.getSelection) {
     var range = document.createRange();
-    range.selectNode(document.getElementById(containerid));
+    range.selectNode(document.getElementById(container_id));
     window.getSelection().addRange(range);
   }
   document.execCommand("copy");
@@ -77,10 +72,24 @@ function copy(containerid, buttonId) {
 async function copied(buttonId){
     document.getElementById(buttonId).innerHTML = "Copied!"
     await new Promise(r => setTimeout(r, 2000));
-    document.getElementById(buttonId).innerHTML = "Copy Contents"
+    document.getElementById(buttonId).innerHTML = "Copy Contents to Clipboard"
 }
 
-
+function download(filename, text, buttonId) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+  element.style.display = 'none';
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
+  saved(buttonId)
+}
+async function saved(buttonId){
+    document.getElementById(buttonId).innerHTML = "Saved!"
+    await new Promise(r => setTimeout(r, 2000));
+    document.getElementById(buttonId).innerHTML = "Save Contents as a File"
+}
 
 
 // --- Import Functions ---
@@ -188,6 +197,10 @@ function assignDialogFunctions() {
     // click [Copy] button
     docEle("copyExportButton").addEventListener("click", function() {
         copy('exportOutput', 'copyExportButton')
+    });
+    // click [Save] button
+    docEle("saveExportButton").addEventListener("click", function() {
+        download("MyCurriculum.csv", docEle('exportOutput').innerText, "saveExportButton")
     });
     
     
