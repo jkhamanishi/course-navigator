@@ -165,10 +165,10 @@ function moveDetails(position="right"){
         docEle("details").style.top = grid.top+"px";
         docEle("details").style.height = grid.height+"px";
         
-        var width = window.outerWidth - docEle("grid").lastElementChild.getBoundingClientRect().right;
-        docEle("details").style.width = width*0.9+"px";
+        var width = window.innerWidth - docEle("grid").lastElementChild.getBoundingClientRect().right;
+        docEle("details").style.width = (width-10)+"px";
         
-        if (docEle("details").offsetWidth < 135){
+        if (docEle("details").offsetWidth < 300){
             moveDetails("bottom");
             //docEle("sideDetails").firstElementChild.checked = false;
             docEle("sideDetails").style.display = "none";
