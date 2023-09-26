@@ -139,7 +139,6 @@ function updateGrid() {
 
 function reloadGrid(){
     loadGrid(csv2jsData(exportCurriculum(false),4));
-    scrollToViewGrid();
 }
 
 

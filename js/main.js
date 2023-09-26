@@ -157,16 +157,16 @@ function moveDetails(position="right"){
         moveDetails.currentPosition = "bottom";
     } else if (position == "right"){
         docEle("details").className = "sideDetails";
-        window.scrollTo(0,0);
         var grid = docEle("grid").getBoundingClientRect();
         
         docEle("details").style.top = grid.top+"px";
         docEle("details").style.height = grid.height+"px";
         
-        var width = window.innerWidth - docEle("grid").lastElementChild.getBoundingClientRect().right;
+        var width = document.documentElement.clientWidth - docEle("grid").lastElementChild.getBoundingClientRect().right;
+        log(width)
         docEle("details").style.width = (width-10)+"px";
         
-        if (docEle("details").offsetWidth < 300){
+        if (docEle("details").offsetWidth < 250){
             moveDetails("bottom");
             //docEle("sideDetails").firstElementChild.checked = false;
             docEle("sideDetails").style.display = "none";
