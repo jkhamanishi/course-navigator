@@ -220,6 +220,6 @@ pre, code, textarea {
 .darkTheme .dialogBox > div {
     background-color: black;
 }
-.darkTheme pre, .darkTheme textarea, .darkTheme select{
+.darkTheme pre, .darkTheme textarea, .darkTheme select, .darkTheme input{
     background-color: #222;
 }

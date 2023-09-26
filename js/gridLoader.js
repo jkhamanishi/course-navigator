@@ -34,14 +34,18 @@ function loadGrid(gridData){
 
     grid.style.setProperty('grid-template-columns', "auto "+"1fr ".repeat(gridData[0].length));
 
+    const useCalendarYear = docEle("enable-starting-year").checked;
+    const startingYear = Number(docEle("starting-year").value);
+
     for (var i=0; i<gridData.length; i++){ // for every row
         
         for (var j=-1; j<gridData[0].length; j++){ // for every column
             if (j==-1) {
                 var term = term2string(i);
                 var newDIV = document.createElement("DIV");
+                var year = useCalendarYear ? startingYear+Math.ceil(i/3) : Math.floor(i/3+1);
                 newDIV.classList.add('termLabel');
-                newDIV.innerHTML = "<div>Year "+Math.floor(i/3+1)+" "+term+"</div>";
+                newDIV.innerHTML = useCalendarYear ? "<div>"+term+" "+year+"</div>" : "<div>Year "+year+" "+term+"</div>";
                 newDIV.setAttribute("style", "grid-row: "+(i+1)+"; grid-column: "+(j+2)+"; z-index: 1;")
                 grid.appendChild(newDIV);
                 continue;

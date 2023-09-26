@@ -44,6 +44,7 @@ function loadSettings(){
     if (userStorage.length > 0){
         setDarkTheme(userStorage.darkTheme == "true");
         setComicSans(userStorage.comicSans == "true");
+        setStartingYear(userStorage.enableStartingYear == "true");
         docEle("hideArrows").checked = userStorage.hideArrows == "true";
         docEle("saveSettings").checked = true;
         log("localStorage found. Your settings have been loaded.");
@@ -57,6 +58,7 @@ function loadSettings(){
         }
     } else {
         loadGrid(flexA);
+        docEle("starting-year").value = new Date().getFullYear()-1;
     }
 }
 function changeSettings(){
@@ -95,6 +97,24 @@ function setComicSans(force = false){
         if (saveSettings()){userStorage.comicSans = false;}
     }
     orientAllArrows();
+}
+
+function setStartingYear(force = false){
+    var checkbox = document.getElementById("enable-starting-year");
+    var year = document.getElementById("starting-year").value;
+    if ((checkbox.checked == true)||force) {
+        checkbox.checked = true;
+        if (!year) { docEle("starting-year").value = Number(userStorage.startingYear) }
+        if (saveSettings()) {
+            userStorage.enableStartingYear = true;
+            userStorage.startingYear = docEle("starting-year").value;
+        }
+    } else {
+        if (saveSettings()){userStorage.enableStartingYear = false;}
+    }
+    if (docEle("grid").firstChild){
+        loadGrid(csv2jsData(exportCurriculum(false),4));
+    }
 }
 
 
