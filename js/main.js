@@ -132,12 +132,10 @@ function changeCurriculum() {
         docEle("curriculum").value = "custom";
         showDialogBox('importDialogBox');
         docEle("importedCurriculum").focus()
-    } else if (docEle("constantSquishing").checked) {
-        loadGrid(window[value+'_squished']); // window[string] reads string as a global variable
-        docEle("exportButton").style.visibility = "hidden";
     } else {
         loadGrid(window[value]); // window[string] reads string as a global variable
         docEle("exportButton").style.visibility = "hidden";
+        if (docEle("constantSquishing").checked) { squish(); }
     }
 }
 
