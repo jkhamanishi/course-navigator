@@ -1,6 +1,11 @@
 # MSE Course Navigator
 
-This web app is designed to replace the outdated [MSE Course Navigator](https://www.sfu.ca/mechatronics/current-students/undergraduate-students/mse-course-navigator.html)
+This web app is designed to replace the outdated MSE Course Navigator
+
+## Usage
+
+To start using it, please head over to the [project's page](https://jkhamanishi.github.io/course-navigator/).
+- https://jkhamanishi.github.io/course-navigator
 
 ## Features
 
@@ -14,12 +19,9 @@ This web app is designed to replace the outdated [MSE Course Navigator](https://
 - Resources related to degree completion and MSE Student Society services
 - Dark mode
 
-## Usage
 
-To start using it, please head over to the [Project's page](https://jkhamanishi.github.io/course-navigator/).
 
 ## Contributing
 
-If you would like to contribute in any way please read
-[CONTRIBUTING.md](CONTRIBUTING.md).
+If you would like to contribute in any way please read [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
