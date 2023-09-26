@@ -34,14 +34,18 @@ function loadGrid(gridData){
 
     grid.style.setProperty('grid-template-columns', "auto "+"1fr ".repeat(gridData[0].length));
 
+    const useCalendarYear = docEle("enable-starting-year").checked;
+    const startingYear = Number(docEle("starting-year").value);
+
     for (var i=0; i<gridData.length; i++){ // for every row
         
         for (var j=-1; j<gridData[0].length; j++){ // for every column
             if (j==-1) {
                 var term = term2string(i);
                 var newDIV = document.createElement("DIV");
+                var year = useCalendarYear ? startingYear+Math.ceil(i/3) : Math.floor(i/3+1);
                 newDIV.classList.add('termLabel');
-                newDIV.innerHTML = "<div>Year "+Math.floor(i/3+1)+" "+term+"</div>";
+                newDIV.innerHTML = useCalendarYear ? "<div>"+term+" "+year+"</div>" : "<div>Year "+year+" "+term+"</div>";
                 newDIV.setAttribute("style", "grid-row: "+(i+1)+"; grid-column: "+(j+2)+"; z-index: 1;")
                 grid.appendChild(newDIV);
                 continue;
@@ -531,30 +535,48 @@ function squish() {
 // --- Add/Remove Columns ---
 // --------------------------
 
-
 function addColumn(){
     var newCurriculum = exportCurriculum(false).replace(/\n/g, ",\n")+",";
     loadGrid(csv2jsData(newCurriculum,4));
 }
 
-
 function removeColumn(){
     var rows, columns;
     [rows, columns] = getGridSize();
-    
     for (var i=0; i<rows; i++){ // for every row
         if (docEle("empty"+(i)+"-"+(columns-1)).firstChild) {
-            alert("Last column contains a course and can not be deleted.")
+            alert("Last column contains at least one course and can not be deleted.")
             return
         }
     }
-    
     var newCurriculum = exportCurriculum(false).replace(/,\n/g, "\n").slice(0, -1);
     loadGrid(csv2jsData(newCurriculum,4));
 }
 
 
+// --- Add/Remove Terms ---
+// ------------------------
 
+function addTerm(){
+    var rows, columns;
+    [rows, columns] = getGridSize();
+    var newCurriculum = exportCurriculum(false)+"\n"+",".repeat(rows);
+    loadGrid(csv2jsData(newCurriculum,4));
+}
+
+function removeTerm(){
+    var rows, columns;
+    [rows, columns] = getGridSize();
+    for (var i=0; i<columns; i++){ // for every column
+        if (docEle("empty"+(rows-1)+"-"+(i)).firstChild) {
+            alert("Last term contains at least one course and can not be deleted.")
+            return
+        }
+    }
+    var oldCurriculum = exportCurriculum(false);
+    var newCurriculum = oldCurriculum.slice(0, oldCurriculum.lastIndexOf('\n'));
+    loadGrid(csv2jsData(newCurriculum,4));
+}
 
 
 

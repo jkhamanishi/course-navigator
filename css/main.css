@@ -136,37 +136,12 @@ body > div {
     vertical-align:text-top;
 }
 .sideDetails{
-    outline: 0.1em dotted grey;
     position: absolute;
     height: 100%;
     width: 10vw;
     top: 0;
     right: 0;
-    resize: horizontal;
     overflow: hidden;
-    direction: rtl;
-}
-.sideDetails *:not(#options) {
-    direction: ltr;
-}
-.sideDetails #options {
-    direction: ltr;
-    white-space: nowrap;
-}
-.sideDetails #options p {
-    white-space: normal;
-}
-.sideDetails #options > div{
-    overflow: auto;
-}
-.sideDetails:after{
-    display: block;
-    direction: ltr;
-    position: absolute;
-    left: 0.8em;
-    bottom: 0;
-    font-size: 0.8em;
-    content: "you can resize the side panel here";
 }
 
 .dragDummy{
@@ -179,6 +154,10 @@ body > div {
 
 /* --- Import/Export --- */
 #exportButton{visibility: hidden;}
+
+#copyExportButton, #saveExportButton {
+    margin: 5px 4px 2px 0px;
+}
 
 #importButton{
     float: right;
@@ -241,6 +220,6 @@ pre, code, textarea {
 .darkTheme .dialogBox > div {
     background-color: black;
 }
-.darkTheme pre, .darkTheme textarea, .darkTheme select{
+.darkTheme pre, .darkTheme textarea, .darkTheme select, .darkTheme input{
     background-color: #222;
 }

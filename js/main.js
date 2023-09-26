@@ -5,12 +5,8 @@
 function hello() {alert('Hello world! (test successful)');};
 function here(){console.log("here");};
 function log(text){console.log(text);};
-
 function docEle(id) {return document.getElementById(id)}
 function notChildren(e, parentId) {if (e.target.id == parentId) {return true;}}
-
-
-
 
 
 // --- Automated Section ---
@@ -20,31 +16,15 @@ var userStorage = window.localStorage;
 
 $(document).ready(function(){
     //alert('page loaded');
-    
     loadSettings();
-    
     moveDetails.currentPosition="right";
-    
-    console.log(courseData); // var courseData from courseData.js
-    
-    
     assignDialogFunctions();
-    
-    
-    
-    
-    
 });
-
 
 $(window).resize(function(){
     updateGrid();
     scrollToViewGrid();
 });
-
-
-
-
 
 
 
@@ -64,6 +44,7 @@ function loadSettings(){
     if (userStorage.length > 0){
         setDarkTheme(userStorage.darkTheme == "true");
         setComicSans(userStorage.comicSans == "true");
+        setStartingYear(userStorage.enableStartingYear == "true");
         docEle("hideArrows").checked = userStorage.hideArrows == "true";
         docEle("saveSettings").checked = true;
         log("localStorage found. Your settings have been loaded.");
@@ -77,6 +58,7 @@ function loadSettings(){
         }
     } else {
         loadGrid(flexA);
+        docEle("starting-year").value = new Date().getFullYear()-1;
     }
 }
 function changeSettings(){
@@ -117,6 +99,24 @@ function setComicSans(force = false){
     orientAllArrows();
 }
 
+function setStartingYear(force = false){
+    var checkbox = document.getElementById("enable-starting-year");
+    var year = document.getElementById("starting-year").value;
+    if ((checkbox.checked == true)||force) {
+        checkbox.checked = true;
+        if (!year) { docEle("starting-year").value = Number(userStorage.startingYear) }
+        if (saveSettings()) {
+            userStorage.enableStartingYear = true;
+            userStorage.startingYear = docEle("starting-year").value;
+        }
+    } else {
+        if (saveSettings()){userStorage.enableStartingYear = false;}
+    }
+    if (docEle("grid").firstChild){
+        loadGrid(csv2jsData(exportCurriculum(false),4));
+    }
+}
+
 
 
 function scrollToViewGrid() {
@@ -132,12 +132,10 @@ function changeCurriculum() {
         docEle("curriculum").value = "custom";
         showDialogBox('importDialogBox');
         docEle("importedCurriculum").focus()
-    } else if (docEle("constantSquishing").checked) {
-        loadGrid(window[value+'_squished']); // window[string] reads string as a global variable
-        docEle("exportButton").style.visibility = "hidden";
     } else {
         loadGrid(window[value]); // window[string] reads string as a global variable
         docEle("exportButton").style.visibility = "hidden";
+        if (docEle("constantSquishing").checked) { squish(); }
     }
 }
 
@@ -154,7 +152,7 @@ function moveDetails(position="right"){
     if (position == "bottom"){
         docEle("details").className = "";
         docEle("details").style.top = "";
-        docEle("details").style.height = "";
+        docEle("details").style.height = "300px";
         docEle("details").style.width = "";
         moveDetails.currentPosition = "bottom";
     } else if (position == "right"){
@@ -165,10 +163,10 @@ function moveDetails(position="right"){
         docEle("details").style.top = grid.top+"px";
         docEle("details").style.height = grid.height+"px";
         
-        var width = window.outerWidth - docEle("grid").lastElementChild.getBoundingClientRect().right;
-        docEle("details").style.width = width*0.9+"px";
+        var width = window.innerWidth - docEle("grid").lastElementChild.getBoundingClientRect().right;
+        docEle("details").style.width = (width-10)+"px";
         
-        if (docEle("details").offsetWidth < 135){
+        if (docEle("details").offsetWidth < 300){
             moveDetails("bottom");
             //docEle("sideDetails").firstElementChild.checked = false;
             docEle("sideDetails").style.display = "none";
@@ -203,11 +201,11 @@ function showDetails(courseId){
     }
     
     
-    function isSetElectve(){
+    function isSetElective(){
         return (docEle(id).innerText !== "Elective");
     }
     var electiveId;
-    if ((courseData[id].type == "complementary elective")&&isSetElectve()){
+    if ((courseData[id].type == "complementary elective")&&isSetElective()){
         electiveId = docEle(id).innerText.replace(/[ -]/g, "");
     }
     
@@ -226,7 +224,7 @@ function showDetails(courseId){
             break;
         }
         case "complementary elective":{
-            if (isSetElectve()){
+            if (isSetElective()){
                 docEle("code").innerHTML = getCourseTitle(electiveId);
             } else {
                 docEle("code").innerHTML += "Complementary Elective";
@@ -345,7 +343,7 @@ function showDetails(courseId){
     docEle("terms").innerHTML += ". ";
     switch (courseData[id].type){
         case "complementary elective":
-            if (isSetElectve()){
+            if (isSetElective()){
                 docEle("terms").innerHTML = "??? (see <a href="+getCoursysBrowseURL(electiveId)+">Coursys Browse</a>)";
                 break;
             }
@@ -372,7 +370,7 @@ function showDetails(courseId){
             break;
         }
         case "complementary elective":{
-            if (!isSetElectve()) {
+            if (!isSetElective()) {
                 docEle("descriptionTitle").innerHTML = "Pre-approved Complementary Study Electives"
                 docEle("source").innerHTML = "resource link";
                 docEle("source").href = base_url+"pre-approved-compementary-study-electives.html"
