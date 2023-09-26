@@ -141,7 +141,6 @@ body > div {
     width: 10vw;
     top: 0;
     right: 0;
-    resize: horizontal;
     overflow: hidden;
 }
 
