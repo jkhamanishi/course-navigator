@@ -5,12 +5,8 @@
 function hello() {alert('Hello world! (test successful)');};
 function here(){console.log("here");};
 function log(text){console.log(text);};
-
 function docEle(id) {return document.getElementById(id)}
 function notChildren(e, parentId) {if (e.target.id == parentId) {return true;}}
-
-
-
 
 
 // --- Automated Section ---
@@ -20,31 +16,15 @@ var userStorage = window.localStorage;
 
 $(document).ready(function(){
     //alert('page loaded');
-    
     loadSettings();
-    
     moveDetails.currentPosition="right";
-    
-    console.log(courseData); // var courseData from courseData.js
-    
-    
     assignDialogFunctions();
-    
-    
-    
-    
-    
 });
-
 
 $(window).resize(function(){
     updateGrid();
     scrollToViewGrid();
 });
-
-
-
-
 
 
 
