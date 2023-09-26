@@ -55,7 +55,7 @@
 </div>
 
 <div id="menu2" class="menu">
-    <a onclick="showDialogBox('settingsDialogBox')">Settings</a><br>
+    <a onclick="showDialogBox('settingsDialogBox')">More Settings</a><br>
     <div style="display: block; height: 0.25em;"></div>
     
     <input type="checkbox" id="hideArrows" name="hideArrows" onchange="orientAllArrows(2)">
@@ -63,7 +63,10 @@
     
     <span>Columns: </span>
     <button type="button" style="width: 1em" onclick="removeColumn()">-</button>/<button type="button" style="width: 1em" onclick="addColumn()">+</button><br>
-    
+
+    <span>Terms: </span>
+    <button type="button" style="width: 1em" onclick="removeTerm()">-</button>/<button type="button" style="width: 1em" onclick="addTerm()">+</button><br>
+
     <button type="button" id="squish" onclick="squish()">Squish courses left</button><br>
     <div><input type="checkbox" id="constantSquishing" name="constantSquishing" onchange="squish()">
     <label for="constantSquishing">Constant squishing</label></div><br>
