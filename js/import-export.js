@@ -55,18 +55,10 @@ function exportCurriculum (copyData = true){
 
 
 function copy(container_id, buttonId) {
-  if (document.selection) {
-    var range = document.body.createTextRange();
-    range.moveToElementText(document.getElementById(container_id));
-    range.select().createTextRange();
-  } else if (window.getSelection) {
-    var range = document.createRange();
-    range.selectNode(document.getElementById(container_id));
-    window.getSelection().addRange(range);
-  }
-  document.execCommand("copy");
-  document.execCommand("copy"); // do it twice, just in case
-  window.getSelection().removeAllRanges();
+  const el = document.createElement('textarea');
+  el.value = docEle(container_id).innerText;
+  document.body.appendChild(el); el.select(); document.execCommand('copy');
+  document.body.removeChild(el);
   copied(buttonId);
 }
 async function copied(buttonId){
