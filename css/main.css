@@ -36,6 +36,7 @@ ul li{
 #menu2 { grid-area: menu2; }
 #main { grid-area: main; }
 body {
+  height: 1200px;
   margin: 5px;
   display: grid;
   grid-template-areas:
