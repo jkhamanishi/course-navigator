@@ -192,7 +192,7 @@ function assignDialogFunctions() {
     });
     // click [Save] button
     docEle("saveExportButton").addEventListener("click", function() {
-        download("MyCurriculum.csv", docEle('exportOutput').innerText, "saveExportButton")
+        download("MyCurriculum.txt", docEle('exportOutput').innerText, "saveExportButton")
     });
     
     
