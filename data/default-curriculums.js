@@ -2,40 +2,40 @@
 // -----------------------------
 
 const flexA_raw =
-`CHEM 120,,PHYS 140,,,,,MATH 151,,CMPT 130,,
-,,PHYS 141,,,MATH 232,,MATH 152,,,MSE 102,MSE 101W
-,,,,,MATH 260,,MATH 251,MSE 110,,,Elective
-MSE 220,,MSE 250,MSE 100,MSE 221,,,,,,,
-MSE 280,,MSE 251,,,MSE 222,MSE 223,,,,,
-,,,,,,,CO-OP,,,,
-,,,,,,,CO-OP,,,,
-,,,,,MSE 210,,Elective,Elective,,,MSE 211
-,MSE 381,MSE 353,MSE 311,,,,,,,,MSE 300
-MSE 310,,MSE 380,,,MSE 320,MSE 321,,,MSE 352,,
-,,,,,,MSE 410,,MSE 4XX,MSE 4XX,MSE 402,
-,,,MSE 312,,,MSE 411,,MSE 4XX,,,MSE 405W
-,,,,,,,CO-OP,,,,
+`CHEM 120,PHYS 140,,,,MATH 151,,,CMPT 130,,,
+,PHYS 141,,MSE 101W,,MATH 232,MATH 152,MSE 102,,,,
+,,,,,MATH 260,MATH 251,,,,MSE 110,Elective
+MSE 220,MSE 221,MSE 100,,MSE 250,,,,,,,
+,,,MSE 280,MSE 222,MSE 251,MSE 223,,,,,
+,,,,,,,,,,,CO-OP
+,,,,,,,,,,,CO-OP
+MSE 210,,,,,,,,,MSE 211,Elective,Elective
+MSE 300,,MSE 381,,MSE 353,MSE 311,,,,,,
+,MSE 320,,MSE 380,,MSE 310,MSE 321,,MSE 352,,,
+,,,,,,MSE 410,MSE 402,,MSE 4XX,MSE 4XX,
+MSE 405W,,MSE 312,,,,MSE 411,,,MSE 4XX,,
+,,,,,,,,,,,CO-OP
 ,,,,,,,,MSE 4XX,MSE 4XX,MSE 4XX,
 ,,,,,,,,,,,
 `;
 
 
 const flexB_raw =
-`CHEM 120,,PHYS 140,,,,,MATH 151,,CMPT 130,,
-,,PHYS 141,,,MATH 232,,MATH 152,,,MSE 102,MSE 101W
+`CHEM 120,,PHYS 140,,,CMPT 130,MATH 151,,,,,
+,,PHYS 141,,,MATH 232,,MATH 152,MSE 101W,,MSE 102,
 ,,,,,MATH 260,,MATH 251,MSE 110,,,Elective
 MSE 220,,MSE 250,MSE 100,MSE 221,,,,,,,
 MSE 280,,MSE 251,,,MSE 222,MSE 223,,,,,
-MSE 381,,MSE 353,,,,,MSE 311,,,,MSE 300
-,MSE 310,MSE 380,,MSE 320,,MSE 321,,,MSE 352,,
-,,,,,,,,,CO-OP,,
-,,,,,,,,,CO-OP,,
-,,,,,,,,,CO-OP,,
-,,,MSE 210,,MSE 4XX,MSE 4XX,,MSE 211,,,
-,,MSE 312,,,MSE 4XX,MSE 4XX,MSE 4XX,,,,
-,,,,,,,,,CO-OP,,
-,,MSE 410,,,Elective,Elective,,,,MSE 402,
-,,MSE 411,,,MSE 4XX,,,,,,MSE 405W
+MSE 381,,MSE 353,,,MSE 311,,MSE 300,,,,
+,MSE 310,MSE 380,MSE 320,MSE 352,,MSE 321,,,,,
+,,,,,,,,,,,CO-OP
+,,,,,,,,,,,CO-OP
+,,,,,,,,,,,CO-OP
+,,,MSE 4XX,MSE 4XX,MSE 210,,,,MSE 211,,
+MSE 312,,,MSE 4XX,MSE 4XX,MSE 4XX,,,,,,
+,,,,,,,,,,,CO-OP
+,,,MSE 410,Elective,Elective,,,,,MSE 402,
+,,,MSE 411,MSE 4XX,,,MSE 405W,,,,
 `;
 
 
