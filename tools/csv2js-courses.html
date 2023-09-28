@@ -55,15 +55,15 @@ function file2data(data){
                 if (lines[i][j] !== "") {
                     data[code]["terms"].push(lines[i][j]);
                 }
-            } else if (7 <= j && j <= 10) {
+            } else if (7 <= j && j <= 11) {
                 if (lines[i][j] !== "") {
                     data[code]["prereqs"].push(lines[i][j]);
                 }
-            } else if (j == 11) {
-                data[code]["concurrentOk"] = lines[i][j];
             } else if (j == 12) {
+                data[code]["concurrentOk"] = lines[i][j];
+            } else if (j == 13) {
                 data[code]["sPrereq"] = lines[i][j];
-            } else if (j >= 13) {
+            } else if (j >= 14) {
                 if (lines[i][j] !== "") {
                     data[code]["options"].push(lines[i][j]);
                 }

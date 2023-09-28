@@ -5,6 +5,206 @@
 // 5. Copy and paste back into this file
 
 var courseData = {
+    BUS207: {
+        type: "course",
+        name: "Managerial Economics",
+        units: 3,
+        terms: ["Fall", "Spring", "Summer", ],
+        prereqs: ["ECON103", "ECON105", "MATH151", ],
+        concurrentOk: "",
+        sPrereq: "",
+        options: ["ECON201", ]
+    },
+    BUS232: {
+        type: "course",
+        name: "Business Statistics",
+        units: 3,
+        terms: ["Fall", "Spring", "Summer", ],
+        prereqs: ["MATH151", ],
+        concurrentOk: "",
+        sPrereq: "15 units",
+        options: []
+    },
+    BUS251: {
+        type: "course",
+        name: "Financial Accounting I",
+        units: 3,
+        terms: ["Fall", "Spring", "Summer", ],
+        prereqs: [],
+        concurrentOk: "",
+        sPrereq: "12 units",
+        options: []
+    },
+    BUS254: {
+        type: "course",
+        name: "Managerial Accounting I",
+        units: 3,
+        terms: ["Fall", "Spring", "Summer", ],
+        prereqs: ["BUS251", ],
+        concurrentOk: "",
+        sPrereq: "15 units",
+        options: []
+    },
+    BUS272: {
+        type: "course",
+        name: "Behaviour in Organizations",
+        units: 3,
+        terms: ["Fall", "Spring", "Summer", ],
+        prereqs: [],
+        concurrentOk: "",
+        sPrereq: "12 units",
+        options: []
+    },
+    BUS312: {
+        type: "course",
+        name: "Introduction to Finance",
+        units: 3,
+        terms: ["Fall", "Spring", "Summer", ],
+        prereqs: ["BUS254", ],
+        concurrentOk: "",
+        sPrereq: "45 units",
+        options: []
+    },
+    BUS343: {
+        type: "course",
+        name: "Introduction to Marketing",
+        units: 3,
+        terms: ["Fall", "Spring", "Summer", ],
+        prereqs: [],
+        concurrentOk: "",
+        sPrereq: "45 units",
+        options: []
+    },
+    BUS360W: {
+        type: "course",
+        name: "Business Communication",
+        units: 4,
+        terms: ["Fall", "Spring", "Summer", ],
+        prereqs: [],
+        concurrentOk: "",
+        sPrereq: "45 units",
+        options: []
+    },
+    BUS381: {
+        type: "course",
+        name: "Introduction to Human Resource Management",
+        units: 3,
+        terms: ["Fall", "Spring", "Summer", ],
+        prereqs: ["BUS272", ],
+        concurrentOk: "",
+        sPrereq: "45 units",
+        options: []
+    },
+    BUS393: {
+        type: "course",
+        name: "Commercial Law",
+        units: 3,
+        terms: ["Fall", "Spring", "Summer", ],
+        prereqs: [],
+        concurrentOk: "",
+        sPrereq: "45 units",
+        options: []
+    },
+    BUS478: {
+        type: "course",
+        name: "Strategy",
+        units: 3,
+        terms: ["Fall", "Spring", "Summer", ],
+        prereqs: ["BUS207", "BUS312", "BUS343", "BUS360W", "BUS381", ],
+        concurrentOk: "",
+        sPrereq: "90 units",
+        options: []
+    },
+    BUS3XX: {
+        type: "business elective",
+        name: "",
+        units: 0,
+        terms: ["Fall", "Spring", "Summer", ],
+        prereqs: [],
+        concurrentOk: "",
+        sPrereq: "",
+        options: []
+    },
+    BUS3XX2: {
+        type: "business elective",
+        name: "",
+        units: 0,
+        terms: ["Fall", "Spring", "Summer", ],
+        prereqs: [],
+        concurrentOk: "",
+        sPrereq: "",
+        options: []
+    },
+    BUS3XX3: {
+        type: "business elective",
+        name: "",
+        units: 0,
+        terms: ["Fall", "Spring", "Summer", ],
+        prereqs: [],
+        concurrentOk: "",
+        sPrereq: "",
+        options: []
+    },
+    BUS4XX: {
+        type: "business elective",
+        name: "",
+        units: 0,
+        terms: ["Fall", "Spring", "Summer", ],
+        prereqs: [],
+        concurrentOk: "",
+        sPrereq: "",
+        options: []
+    },
+    BUS4XX2: {
+        type: "business elective",
+        name: "",
+        units: 0,
+        terms: ["Fall", "Spring", "Summer", ],
+        prereqs: [],
+        concurrentOk: "",
+        sPrereq: "",
+        options: []
+    },
+    BUS4XX3: {
+        type: "business elective",
+        name: "",
+        units: 0,
+        terms: ["Fall", "Spring", "Summer", ],
+        prereqs: [],
+        concurrentOk: "",
+        sPrereq: "",
+        options: []
+    },
+    BUS4XX4: {
+        type: "business elective",
+        name: "",
+        units: 0,
+        terms: ["Fall", "Spring", "Summer", ],
+        prereqs: [],
+        concurrentOk: "",
+        sPrereq: "",
+        options: []
+    },
+    BUS4XX5: {
+        type: "business elective",
+        name: "",
+        units: 0,
+        terms: ["Fall", "Spring", "Summer", ],
+        prereqs: [],
+        concurrentOk: "",
+        sPrereq: "",
+        options: []
+    },
+    BUS4XX6: {
+        type: "business elective",
+        name: "",
+        units: 0,
+        terms: ["Fall", "Spring", "Summer", ],
+        prereqs: [],
+        concurrentOk: "",
+        sPrereq: "",
+        options: []
+    },
     CHEM120: {
         type: "course",
         name: "General Chemistry I",
@@ -84,6 +284,56 @@ var courseData = {
         concurrentOk: "",
         sPrereq: "",
         options: ["MSE293", "MSE294", "MSE393", "MSE394", "MSE493", "MSE494", ]
+    },
+    ECON103: {
+        type: "course",
+        name: "Principles of Microeconomics",
+        units: 4,
+        terms: ["Fall", "Spring", "Summer", ],
+        prereqs: [],
+        concurrentOk: "",
+        sPrereq: "",
+        options: []
+    },
+    ECON105: {
+        type: "course",
+        name: "Principles of Macroeconomics",
+        units: 4,
+        terms: ["Fall", "Spring", "Summer", ],
+        prereqs: [],
+        concurrentOk: "",
+        sPrereq: "",
+        options: []
+    },
+    ECON113: {
+        type: "course",
+        name: "Introduction to Microeconomics",
+        units: 3,
+        terms: ["Fall", "Spring", ],
+        prereqs: [],
+        concurrentOk: "",
+        sPrereq: "",
+        options: []
+    },
+    ECON115: {
+        type: "course",
+        name: "Introduction to Macroeconomics",
+        units: 3,
+        terms: ["Fall", "Spring", ],
+        prereqs: [],
+        concurrentOk: "",
+        sPrereq: "",
+        options: []
+    },
+    ECON201: {
+        type: "course",
+        name: "Microeconomic Theory I: Competitive Behavior",
+        units: 4,
+        terms: ["Fall", "Spring", "Summer", ],
+        prereqs: ["ECON103", "ECON105", "MATH151", ],
+        concurrentOk: "",
+        sPrereq: "",
+        options: ["BUS207", ]
     },
     Elective: {
         type: "complementary elective",
@@ -209,7 +459,7 @@ var courseData = {
         type: "course",
         name: "Process Form and Convention in Professional Genres",
         units: 3,
-        terms: ["Fall", "Spring", ],
+        terms: ["Spring", ],
         prereqs: [],
         concurrentOk: "",
         sPrereq: "",
@@ -219,7 +469,7 @@ var courseData = {
         type: "course",
         name: "Applied Science Technology and Society",
         units: 3,
-        terms: ["Fall", "Spring", ],
+        terms: ["Spring", ],
         prereqs: [],
         concurrentOk: "",
         sPrereq: "",
@@ -814,5 +1064,5 @@ var courseData = {
         concurrentOk: "",
         sPrereq: "",
         options: []
-    },
+    }
 };

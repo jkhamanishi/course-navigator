@@ -96,6 +96,25 @@ MSE 310,,,MSE 320,,,MSE 321,MSE 4XX,,,,
 `;
 
 
+const double_degree_raw =
+`CHEM 120,,MATH 151,,PHYS 140,,CMPT 130,MSE 100,,,,ECON 105,
+,MATH 152,MATH 232,,,PHYS 141,,MSE 102,MSE 110,MSE 101W,,,
+,,,,,,,,,,,,Elective
+MSE 220,MATH 251,MSE 221,,MATH 260,MSE 250,,,,ECON 103,,,
+,,,MSE 210,MSE 222,,,,BUS 272,,BUS251,BUS254,BUS 393
+,,,,,,,,,,,,CO-OP
+,,,MSE 321,,,,,BUS 381,BUS 207,BUS 343,BUS 312,BUS 232
+MSE 223,MSE 211,,,MSE 280,MSE 251,,,,,,BUS 3XX,BUS 3XX
+,,,,,,,,,,,,CO-OP
+MSE 320,,MSE 380,MSE 310,,,MSE 352,,BUS 360W,,,BUS 4XX,
+,,,,,,,,,,,,CO-OP
+MSE 312,,,MSE 381,MSE 311,MSE 353,,,,,,BUS 4XX,
+,,,,,,,,,,,,CO-OP
+MSE 4XX,MSE 4XX,MSE 4XX,,,,,MSE 402,MSE 410,,BUS 478,,
+MSE 4XX,MSE 4XX,MSE 4XX,,,,,,MSE 411,,,BUS 4XX,
+`;
+
+
 // --- Processed Data in Variables ---
 // -----------------------------------
 
@@ -104,4 +123,5 @@ var flexB = csv2jsData(flexB_raw, 4);
 var flexC = csv2jsData(flexC_raw, 4);
 var fourY = csv2jsData(fourY_raw, 4);
 var dev_curriculum = csv2jsData(dev_curriculum_raw, 4);
+var double_deg = csv2jsData(double_degree_raw, 4);
 

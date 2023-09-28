@@ -163,7 +163,6 @@ function moveDetails(position="right"){
         docEle("details").style.height = grid.height+"px";
         
         var width = document.documentElement.clientWidth - docEle("grid").lastElementChild.getBoundingClientRect().right;
-        log(width)
         docEle("details").style.width = (width-10)+"px";
         
         if (docEle("details").offsetWidth < 250){
@@ -221,6 +220,10 @@ function showDetails(courseId){
         }
         case "technical elective":{
             docEle("code").innerHTML = "Technical Elective";
+            break;
+        }
+        case "business elective":{
+            docEle("code").innerHTML = "Business Concentration Elective";
             break;
         }
         case "complementary elective":{
@@ -347,6 +350,7 @@ function showDetails(courseId){
                 docEle("terms").innerHTML = "??? (see <a href="+getCoursysBrowseURL(electiveId)+">Coursys Browse</a>)";
                 break;
             }
+        case "business elective":
         case "technical elective":
         case "technical elective option":
             docEle("terms").innerHTML = "???";
