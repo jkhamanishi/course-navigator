@@ -17,10 +17,12 @@ button, label, input, select {cursor: pointer;}
   padding: 0;
 }
 
-a {color:#0000FF;text-decoration:underline;cursor:pointer;}
-a:visited {                 /* Visited link*/
-    //color: #00FF00;
-    color: #0000FF} 
+a {
+    color: #0000FF;
+    text-decoration: underline;
+    cursor: pointer;
+}
+a:visited {color: #0000FF;} /* Visited link*/
 a:hover {color: #FF00FF;}   /* Mouse over link */
 a:active {color: #0000FF;}  /* Selected link   */
 
@@ -43,6 +45,7 @@ body {
     'header menu1 menu2'
     'main main main';
   grid-template-columns: auto 1fr 1fr;
+  grid-template-rows: auto 1fr;
   grid-gap: 10px;
   max-width: 1350px;
 }
@@ -103,7 +106,6 @@ body > div {
   padding: 5px 2px 0px;
   font-size: clamp(8px, 0.8vw, 12px);
   font-family: sans-serif;
-  //font: 1vw "Comic Sans MS", "Comic Sans", 'Brush Script MT', sans-serif;
   border: 0.2em solid royalblue;
   position: relative;
   cursor: pointer;
@@ -131,7 +133,6 @@ body > div {
 
 
 /* --- Details --- */
-//#main{position: relative;}
 #details img, .inlineWarning {
     height: 1em; 
     vertical-align:text-top;

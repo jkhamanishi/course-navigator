@@ -23,7 +23,6 @@ $(document).ready(function(){
 
 $(window).resize(function(){
     updateGrid();
-    scrollToViewGrid();
 });
 
 
@@ -148,7 +147,6 @@ function changeCurriculum() {
 // -----------------------
 
 function moveDetails(position="right"){
-    //if (arguments.length == 0){position = moveDetails.currentPosition}
     if (position == "bottom"){
         docEle("details").className = "";
         docEle("details").style.top = "";
